@@ -1,2 +1,2 @@
-export * from './Obj/class.ts'
-export * from './Obj/typings.ts'
+export * from './obj/class.ts'
+export * from './obj/typings.ts'
