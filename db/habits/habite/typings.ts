@@ -8,7 +8,7 @@ export interface Crg {
   taskTemplate: TaskTemplate.JsonRepr
 }
 export interface NewArg {
-  id: Id
+  id?: Id
   recurrer: Recurrer.Recurrer
   taskTemplate: TaskTemplate.TaskTemplate
 }

@@ -39,6 +39,10 @@ export class Habit {
   }
 
   static new(arg: NewArg) {
-    return new Habit(arg)
+    return new Habit({
+      id: arg.id || Id(),
+      recurrer: arg.recurrer,
+      taskTemplate: arg.taskTemplate,
+    })
   }
 }

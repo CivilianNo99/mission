@@ -8,4 +8,4 @@ export class Store extends Persistent.Store<Task.Task> {
   }
 }
 
-export const store = new Store()
+export const TASKS_STORE = new Store()

@@ -1,14 +1,18 @@
-import { Null, msec } from "/utility/ulib.ts"
-import { Due } from '/db/due-templates.ts'
+import { Temporal } from "npm:@js-temporal/polyfill"
+import * as DueTemplate from '/db/due-templates/due-template.ts'
 import * as TaskTemplate from '../task-template.ts'
 
 export interface Crg extends TaskTemplate.Crg {
-  due: Null<Due.JsonRepr>
+  dueTemplate: DueTemplate.DueTemplate
   description: string
-  creationDate: msec
+  creationInstant: Temporal.Instant
+}
+export interface NewArg extends TaskTemplate.Crg {
+  dueTemplate: DueTemplate.DueTemplate
+  description: string
 }
 export interface JsonRepr extends TaskTemplate.JsonRepr {
-  due: Null<Due.JsonRepr>
+  dueTemplate: DueTemplate.JsonRepr
   description: string
-  creationDate: msec
+  creationInstant: string
 }

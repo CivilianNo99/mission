@@ -1,30 +1,23 @@
 import { Null, msec } from '/utility/ulib.ts'
 import * as Task from '/db/tasks/task.ts'
 import { Due } from '/db/dues.ts'
+import { Temporal } from 'npm:@js-temporal/polyfill'
 
 export interface Crg extends Task.Crg {
-  due: Null<Due.JsonRepr>
-  // dueDate: Null<msec>
+  due: Due.Due
   isComplete: boolean
   description: string
-  creationDate: msec
-  completionDate: Null<msec>
+  creationInstant: Temporal.Instant
+  completionInstant: Null<Temporal.Instant>
 }
-
 export interface NewArg extends Task.NewArg {
-  due: Null<Due.Due>
-  // dueDate: Null<msec>
-  isComplete: boolean
+  due: Due.Due
   description: string
-  creationDate: msec
-  completionDate: Null<msec>
 }
-
 export interface JsonRepr extends Task.JsonRepr {
-  due: Null<Due.JsonRepr>
-  // dueDate: Null<msec>
+  due: Due.JsonRepr
   isComplete: boolean
   description: string
-  creationDate: msec
-  completionDate: Null<msec>
+  creationInstant: string
+  completionInstant: Null<string>
 }

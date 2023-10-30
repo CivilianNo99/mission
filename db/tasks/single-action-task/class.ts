@@ -1,35 +1,25 @@
-import { Now } from '/utility/time.ts'
-// import * as Recurrers from '../recurrers.ts'
-import * as Task from '/db/tasks/task.ts'
-import { Kind } from '/db/tasks/common.ts'
-import { Null, msec } from '/utility/ulib.ts'
-import { Crg, JsonRepr } from './typings.ts'
+import { Id } from '/db/id.ts'
 import { Due } from '/db/dues.ts'
+import { Task } from '/db/tasks/task.ts'
+import { Kind } from '/db/tasks/common.ts'
+import { Null } from '/utility/ulib.ts'
+import { Temporal } from 'npm:@js-temporal/polyfill'
+import { Crg, JsonRepr, NewArg } from './typings.ts'
 
-export enum Due {
-  Now = 0,
-  Hour = 1000 * 60 * 60,
-  Day = Hour * 24,
-  Week = Day * 30,
-  Year = Day * 360,
-}
-
-export class SingleActionTask extends Task.Task {
-  due: Null<Due.Due>
-  dueDate: Null<msec>
+export class SingleActionTask extends Task {
+  due: Due.Due
   isComplete: boolean
   description: string
-  creationDate: msec
-  completionDate: Null<msec>
+  creationInstant: Temporal.Instant
+  completionInstant: Null<Temporal.Instant>
   
   constructor(arg: Crg) {
     super(arg)
-    this.due = null
-    this.description = arg.description
-    this.dueDate = 0 // arg.dueDate
+    this.due = arg.due
     this.isComplete = arg.isComplete
-    this.creationDate = arg.creationDate
-    this.completionDate = arg.completionDate
+    this.description = arg.description
+    this.creationInstant = arg.creationInstant
+    this.completionInstant = arg.completionInstant
   }
 
   get kind() {
@@ -37,19 +27,19 @@ export class SingleActionTask extends Task.Task {
   }
 
   get isDue() {
-    return this.isDueIn(Due.Now)
+    return !this.isComplete && this.due.isDue
   }
   
   get isPending() {
-    return !this.isComplete 
-      && this.dueDate !== null 
-      && this.dueDate < Now()
+    return !this.isComplete && !this.due.isDue
   }
 
-  isDueIn(period: Due) {
-    return !this.isComplete 
-      && this.dueDate !== null 
-      && this.dueDate + period >= Now()
+  isDueIn(duration: Temporal.Duration) {
+    return !this.isComplete && this.due.isDueIn(duration)    
+  }
+
+  isDueAt(instant: Temporal.Instant) {
+    return !this.isComplete && this.due.isDueAt(instant)    
   }
 
   complete() {
@@ -63,23 +53,22 @@ export class SingleActionTask extends Task.Task {
   jsonify(): JsonRepr {
     return {
       ...super.jsonify(),
-      due: this.due?.jsonify() ?? null,
+      due: this.due.jsonify(),
       description: this.description,
       isComplete: this.isComplete,
-      creationDate: this.creationDate,
-      completionDate: this.completionDate,
+      creationInstant: this.creationInstant.toString(),
+      completionInstant: this.completionInstant?.toString() ?? null,
     }
   }
 
-  /** 
-   * Should be called before this obj is destroyed.
-  */
-  async destroy() {
-    // add an event that is obj was destroyed.
-    // await this.recurrer.apply()
-  }
-
-  static new(arg: Crg) {
-    return new SingleActionTask(arg)
+  static new(arg: NewArg) {
+    return new SingleActionTask({
+      id: arg.id || Id(),
+      due: arg.due,
+      isComplete: false,
+      description: arg.description,
+      creationInstant: Temporal.Now.instant(),
+      completionInstant: null,
+    })
   }
 }
