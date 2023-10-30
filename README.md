@@ -28,7 +28,22 @@ Sort items by creation date ascending and descending order.
 Sort items completion date ascending and descending order.
 
 # Feature
-Make an item recurring. When an item is checked, it scheduls the creation of another item.
+Habits. A habit is an object that automaticall or manually generates tasks.
+
+It can generate tasks every time an x period of time passes.
+
+It can generate tasks every time a task generated bt it is done.
+
+It can generate tasks every week.
+
+It can generate tasks every particular day of week.
+
+It can generate tasks every x number of days.
+
+# Feature
+When an item is checked, it scheduls the creation of a number of other items.
+
+For every x period of times passes, one item is created.
 
 User can create a number of clone todo items when the original item is deleted.
 

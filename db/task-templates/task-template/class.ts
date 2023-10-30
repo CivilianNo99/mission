@@ -2,8 +2,10 @@ import { Id } from '/db/id.ts'
 import { Task } from '/db/tasks/task.ts'
 import { Kind } from '../common.ts'
 import { Crg, JsonRepr } from "./typings.ts"
+import { MaybePromise } from '/utility/ulib.ts'
 
 export abstract class TaskTemplate {
+  /** Id of this template. */
   readonly id: Id
 
   constructor(arg: Crg) {
@@ -11,7 +13,8 @@ export abstract class TaskTemplate {
   }
 
   abstract get kind(): Kind
-  abstract new(...args: unknown[]): Task
+  abstract create(): MaybePromise<Task>
+  abstract createAndSave(): MaybePromise<Task>
 
   jsonify(): JsonRepr {
     return {

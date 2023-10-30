@@ -1,23 +1,29 @@
-import { Crg } from './due.ts'
-import { atMillisecond, afterMilliseconds, never } from '../due-dates.ts'
+import { Temporal } from 'npm:@js-temporal/polyfill'
+import { AfterDuration, Never, Due } from '../dues.ts'
 
 export enum Kind {
-  Never,
-  AtMillisecond,
-  AfterMilliseconds,
+  NeverDue,
+  DueAfterDuration,
 }
 
-export function initAny(kind: Kind, arg: Crg) {
-  switch (kind) {
-    case Kind.Never: return new never.NeverDue()
-    case Kind.AtMillisecond: return new atMillisecond.DueAtMillisecond(arg as any)
-    case Kind.AfterMilliseconds: return new afterMilliseconds.DueAfterMilliseconds(arg as any)
-  }
+function isNeverDueJsonRepr(jsonRepr: Due.JsonRepr): jsonRepr is Never.JsonRepr {
+  return jsonRepr.kind === Kind.NeverDue
 }
-export function createAny(kind: Kind, arg: Crg) {
-  switch (kind) {
-    case Kind.Never: return new never.NeverDue()
-    case Kind.AtMillisecond: return new atMillisecond.DueAtMillisecond(arg as any)
-    case Kind.AfterMilliseconds: return new afterMilliseconds.DueAfterMilliseconds(arg as any)
+
+function isDueAfterDurationJsonRepr(jsonRepr: Due.JsonRepr): jsonRepr is AfterDuration.JsonRepr {
+  return jsonRepr.kind === Kind.DueAfterDuration
+}
+
+export function initiailze(jsonRepr: Due.JsonRepr) {
+  if (isDueAfterDurationJsonRepr(jsonRepr)) {
+    return new AfterDuration.DueAfterDuration({
+      due: Temporal.Instant.from(jsonRepr.due)
+    })
   }
+
+  if (isNeverDueJsonRepr(jsonRepr)) {
+    return new Never.NeverDue()
+  }
+  
+  throw new TypeError('Invalid argument')
 }

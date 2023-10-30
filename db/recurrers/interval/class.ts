@@ -30,12 +30,13 @@ export class IntervalRecurrer extends Recurrer {
 
     // If `times` is zero, then, `this.apply` has been called less than `this.interval`
     // milliseconds ago, so, it is not valid to call it now. 
-    if (times > 0) {
-      this.prevApply = Now()
+    if (times <= 0) {
+      return
+    }
 
-      for (const _ of range(times)) {
-        await this.recurrer.apply()
-      }
+    this.prevApply = Now()
+    for (const _ of range(times)) {
+      await this.recurrer.apply()
     }
   }
 
@@ -47,4 +48,13 @@ export class IntervalRecurrer extends Recurrer {
       prevApply: this.prevApply,
     }
   }
+
+  // static newEveryDay() {}
+  // static newEveryWeek() {}
+  // static newEverySunday() {}
+  // static newEveryMonday() {}
+  // static newEveryTuseday() {}
+  // static newEveryThursday() {}
+  // static newEveryFirday() {}
+  // static newEverySaturday() {}
 }

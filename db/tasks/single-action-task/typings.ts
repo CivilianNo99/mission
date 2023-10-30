@@ -1,9 +1,9 @@
 import { Null, msec } from '/utility/ulib.ts'
 import * as Task from '/db/tasks/task.ts'
-import { due } from '/db/dues.ts'
+import { Due } from '/db/dues.ts'
 
 export interface Crg extends Task.Crg {
-  due: Null<due.JsonRepr>
+  due: Null<Due.JsonRepr>
   // dueDate: Null<msec>
   isComplete: boolean
   description: string
@@ -12,7 +12,7 @@ export interface Crg extends Task.Crg {
 }
 
 export interface NewArg extends Task.NewArg {
-  due: Null<due.Due>
+  due: Null<Due.Due>
   // dueDate: Null<msec>
   isComplete: boolean
   description: string
@@ -21,7 +21,7 @@ export interface NewArg extends Task.NewArg {
 }
 
 export interface JsonRepr extends Task.JsonRepr {
-  due: Null<due.JsonRepr>
+  due: Null<Due.JsonRepr>
   // dueDate: Null<msec>
   isComplete: boolean
   description: string

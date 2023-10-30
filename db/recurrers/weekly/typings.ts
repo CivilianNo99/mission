@@ -1,14 +1,14 @@
-import * as Recurrer from "../recurrer.ts"
+import * as Recurrer from '../recurrer.ts'
+import { Temporal } from 'npm:@js-temporal/polyfill'
 
 export interface Crg extends Recurrer.Crg {
-  times: number
+  lastWeek: Temporal.Instant
   recurrer: Recurrer.Recurrer
 }
 export interface NewArg extends Recurrer.NewArg {
-  times: number
   recurrer: Recurrer.Recurrer
 }
 export interface JsonRepr extends Recurrer.JsonRepr {
-  times: number
+  lastWeek: string
   recurrer: Recurrer.JsonRepr
 }

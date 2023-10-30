@@ -1,10 +1,9 @@
 import * as Due from '../due.ts'
+import { Temporal } from 'npm:@js-temporal/polyfill'
 
 export interface Crg extends Due.Crg {
-  from: number
-  dueAfter: number
+  due: Temporal.Instant
 }
 export interface JsonRepr extends Due.JsonRepr {
-  from: number
-  dueAfter: number
+  due: string
 }

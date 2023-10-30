@@ -4,7 +4,7 @@ import * as Task from '/db/tasks/task.ts'
 import { Kind } from '/db/tasks/common.ts'
 import { Null, msec } from '/utility/ulib.ts'
 import { Crg, JsonRepr } from './typings.ts'
-import { due } from '/db/dues.ts'
+import { Due } from '/db/dues.ts'
 
 export enum Due {
   Now = 0,
@@ -15,9 +15,8 @@ export enum Due {
 }
 
 export class SingleActionTask extends Task.Task {
-  due: Null<due.Due>
+  due: Null<Due.Due>
   dueDate: Null<msec>
-  // recurrer: Recurrers.recurrer.Recurrer
   isComplete: boolean
   description: string
   creationDate: msec
@@ -31,12 +30,6 @@ export class SingleActionTask extends Task.Task {
     this.isComplete = arg.isComplete
     this.creationDate = arg.creationDate
     this.completionDate = arg.completionDate
-
-    // this.recurrer = Recurrers.fn.Fn.new(() => {
-    //   // clone
-    // })
-
-    // this.recurrer = new Recurrer({})
   }
 
   get kind() {
@@ -70,31 +63,19 @@ export class SingleActionTask extends Task.Task {
   jsonify(): JsonRepr {
     return {
       ...super.jsonify(),
+      due: this.due?.jsonify() ?? null,
       description: this.description,
-      // dueDate: this.dueDate,
       isComplete: this.isComplete,
       creationDate: this.creationDate,
       completionDate: this.completionDate,
-      due: this.due?.jsonify() ?? null,
     }
   }
-
-  // recur() {
-  //   this.owner.items.addOne(SingleActionTask.new({
-  //     id: '',
-  //     description: this.description,
-  //     dueDate: null,
-  //     // dueDate: this.dueDate.recur(),
-  //     isComplete: false,
-  //     creationDate: Now(),
-  //     completionDate: null,
-  //   }))
-  // }
 
   /** 
    * Should be called before this obj is destroyed.
   */
   async destroy() {
+    // add an event that is obj was destroyed.
     // await this.recurrer.apply()
   }
 

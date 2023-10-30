@@ -1,14 +1,13 @@
-import * as Recurrer from "../recurrer.ts"
+import * as Recurrer from '../recurrer.ts'
 
 export interface Crg extends Recurrer.Crg {
-  times: number
+  lastDay: number
   recurrer: Recurrer.Recurrer
 }
 export interface NewArg extends Recurrer.NewArg {
-  times: number
   recurrer: Recurrer.Recurrer
 }
 export interface JsonRepr extends Recurrer.JsonRepr {
-  times: number
+  lastDay: number
   recurrer: Recurrer.JsonRepr
 }

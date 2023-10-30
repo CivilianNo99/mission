@@ -1,5 +1,6 @@
 import { Id } from '/db/id.ts'
 import { Kind } from '../common.ts'
+import { MaybePromise } from '/utility/ulib.ts'
 import { Crg, JsonRepr } from './typings.ts'
 
 export abstract class Task {
@@ -10,6 +11,8 @@ export abstract class Task {
   }
 
   abstract get kind(): Kind
+  abstract create(): Task
+  abstract createAndSave(): MaybePromise<Task>
 
   jsonify(): JsonRepr {
     return {

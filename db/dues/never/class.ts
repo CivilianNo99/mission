@@ -1,17 +1,22 @@
-import * as Due from '../due.ts'
+import { Due } from '../due.ts'
 import { Kind } from '../common.ts'
 import { JsonRepr } from './typings.ts'
+import { Temporal } from 'npm:@js-temporal/polyfill'
 
-export class NeverDue extends Due.Due {
-  get kind(): Kind {
-    return Kind.Never
+export class NeverDue extends Due {
+  get kind() {
+    return Kind.NeverDue
   }
 
   get isDue() {
     return false
   }
 
-  isDueIn(thing: any): boolean {
+  isDueIn(duration: Temporal.Duration) {
+    return false
+  }
+
+  isDueAt(instant: Temporal.Instant) {
     return false
   }
 
