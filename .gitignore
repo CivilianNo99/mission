@@ -24,5 +24,6 @@ dist-ssr
 *.sw?
 
 
-# My persional notes
-__me__*
+# My persional stuff
+**/__me__*
+**/__test__*

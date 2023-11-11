@@ -3,8 +3,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths" : {
-      "db/*": ["./db/*"],
+      // "db/*": ["./db/*"],
       "/db/*": ["./db/*"],
+      "/utility/*": ["./utility/*"],
       "npm:*": ["./node_modules/*"],
     },
     "target": "ESNext",

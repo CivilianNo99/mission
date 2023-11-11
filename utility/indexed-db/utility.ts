@@ -1,28 +1,5 @@
-import { DatabaseUpgrader } from "./database-upgrader"
+import { DatabaseUpgrader } from "./upgraders/database-upgrader"
 
-export function purePutOrPushItemOnce<Item>(
-  array: Item[], 
-  toPut: Item,
-  predicate: (item: Item) => boolean,
-) {  
-  const copy: Item[] = []
-  let put = false
-
-  for (const item of array) {
-    if (!put && predicate(item)) {
-      copy.push(toPut)
-      put = true
-    } else {
-      copy.push(item)
-    }
-  }
-
-  if (!put) {
-    copy.push(toPut)
-  }
-
-  return copy
-}
 
 export function promisify<T>(request: IDBRequest<T>) {
   return new Promise<T>((resolve, reject) => {
@@ -67,4 +44,18 @@ export function affirmStringKey(value: unknown) {
     return value
   }
   throw new TypeError("Invalid database key")
+}
+
+
+export class Awaiter<T> {
+  throw!: (error: unknown) => void
+  return!: (value: T) => void
+  promise: Promise<T>
+
+  constructor() {
+    this.promise = new Promise((resolve, reject) => {
+      this.return = resolve
+      this.throw = reject
+    })
+  }
 }

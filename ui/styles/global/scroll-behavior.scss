@@ -1,0 +1,9 @@
+*, 
+*::after, 
+*::before { 
+  scroll-behavior: inherit;
+}
+
+:root {
+  scroll-behavior: smooth;
+}

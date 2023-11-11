@@ -1,17 +1,20 @@
-import { TransactionWrap } from "./transaction-wrap"
 import { promisifyOpen } from "./utility"
+import type { Obj } from "./obj"
 import type { Null } from "utility/ulib"
-import type { DatabaseUpgrader } from "./database-upgrader"
+import type { Store } from "./store"
+import type { DatabaseUpgrader } from "./upgraders/database-upgrader"
 
 export class Database {
   readonly name: string
   readonly version: number
   private maybeDatabase: Null<IDBDatabase>
+  private readonly stores: Store<Obj>[]
 
   constructor(name: string, version: number) {
     this.name = name
     this.version = version
     this.maybeDatabase = null
+    this.stores = []
   }
 
   /** 
@@ -50,13 +53,13 @@ export class Database {
    * Creates and returns a readonly transaction over the provided stores.
   */
   query(stores: string | string[], options?: IDBTransactionOptions) {
-    return new TransactionWrap(this.database.transaction(stores, "readonly", options))
+    return this.database.transaction(stores, "readonly", options)
   }
   /** 
    * Creates and returns a readwrite transaction over the provided stores.
   */
   mutate(stores: string | string[], options?: IDBTransactionOptions) {
-    return new TransactionWrap(this.database.transaction(stores, "readwrite", options))
+    return this.database.transaction(stores, "readwrite", options)
   }
   /** 
    * This function is called whenever the provided database version is higher
@@ -68,5 +71,18 @@ export class Database {
   */
   onUpgrade(upgrader: DatabaseUpgrader) {
     // noop
+  }
+
+  private hasStore(name: string) {
+    return this.stores.some(store => store.name === name)
+  }
+  private affirmStoreNameIsAvailable(name: string) {
+    if (this.hasStore(name)) {
+      throw new Error(`The database already has a store named "${name}".`)
+    }
+  }
+  registerStore(store: Store<Obj>) {
+    this.affirmStoreNameIsAvailable(store.name)
+    this.stores.push(store)
   }
 }

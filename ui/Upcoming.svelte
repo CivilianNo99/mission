@@ -1,54 +1,48 @@
 <script lang="ts">
   import TaskUi from "./Upcoming/Task.svelte";
-  import { Task, tasks } from "/db/utility/indexed-db"
+  import { Task, tasks } from "../utility/indexed-db"
 
-  
-  async function moon() {
-    // const _1 = Task.new({ description: "Wash your teeth" })
-    // const _2 = Task.new({ description: "Dance with your cat" })
-    // await tasks.add(_1)
-    // await tasks.add(_2)
-    // console.log(await tasks.get(_1.id))
-    // console.log(await tasks.get(_2.id))
-  }
+  const all = tasks.allR()
 
-  moon()
-  // let description: string
-
-  // async function create() {
-  //   if (description) {
-  //     await tasks.add(Task.new({ description }))
-  //   }
-  // }
-
-  let ids = ["jk", "kjhkjh"]
-  
-  $: moon {
-    
+  let description: string
+  function create() {
+    if (description) {
+      tasks.add(Task.new({ description }))
+      description = ''
+    }
   }
 </script>
 
-<div>
+<div class="self">
   <h1>Upcoming Tasks</h1>
-  <!-- <input type="text" bind:value={description}>
-  <button on:click={create}>Create</button> -->
-<!-- 
+
+  <div>
+    <input type="text" bind:value={description}>
+    <button on:click={create}>Create</button>
+  </div>
+
   <div class="tasks">
-    {#if $tasks}
-      {#each $tasks as task (task.id)}
-        <TaskUi 
-          description={task.description} 
-          isComplete={task.isComplete} 
-        />
+    {#if $all}
+      {#each $all as task (task.id)}
+        <TaskUi id={task.id} />
       {/each}
     {/if}
-  </div> -->
+  </div>
 </div>
 
 <style>
-  .tasks {
+  .self {
+    gap: 2rem;
     display: flex;
     flex-flow: column nowrap;
-    gap: 20px;
+    padding: 2rem;
+  }
+
+  .tasks {
+    gap: 1.1rem;
+    display: flex;
+    flex-flow: column nowrap;
+
+    max-width: 500px;
   }
 </style>

@@ -1,5 +1,33 @@
-import type { ValidKey } from "./ValidKey"
-import type { Obj } from "./obj"
+import type { Obj } from "../obj"
+import type { Store } from "../store"
+
+export function createAddMutation<T extends Obj>(store: Store<T>, item: any) {
+  return new AddMutation<T>({
+    database: store.database.name,
+    store: store.name,
+    item: item,
+  })
+}
+export function createPutMutation<T extends Obj>(store: Store<T>, item: any) {
+  return new PutMutation<T>({
+    database: store.database.name,
+    store: store.name,
+    item: item,
+  })
+}
+export function createDeleteMutation(store: Store<Obj>, itemId: string) {
+  return new DeleteMutation({
+    database: store.database.name,
+    store: store.name,
+    itemId: itemId,
+  })
+}
+export function createClearMutation(store: Store<Obj>) {
+  return new ClearMutation({
+    database: store.database.name,
+    store: store.name,
+  })
+}
 
 export enum MutationType {
   Add,
@@ -14,11 +42,11 @@ export interface MutationCrg {
 }
 
 export interface AddMutationCrg<Value extends Obj> extends Mutation {
-  value: Value
+  item: Value
 }
 
 export interface PutMutationCrg<Value extends Obj> extends Mutation {
-  value: Value
+  item: Value
 }
 
 export interface ClearMutationCrg extends Mutation {
@@ -26,7 +54,7 @@ export interface ClearMutationCrg extends Mutation {
 }
 
 export interface DeleteMutationCrg extends Mutation {
-  key: string
+  itemId: string
 }
 
 export class Mutation {
@@ -44,7 +72,7 @@ export class AddMutation<Value extends Obj> extends Mutation {
 
   constructor(arg: AddMutationCrg<Value>) {
     super(arg)
-    this.value = arg.value
+    this.value = arg.item
   }
 
   get type() {
@@ -57,7 +85,7 @@ export class PutMutation<Value extends Obj> extends Mutation {
 
   constructor(arg: PutMutationCrg<Value>) {
     super(arg)
-    this.value = arg.value
+    this.value = arg.item
   }
 
   get type() {
@@ -72,11 +100,11 @@ export class ClearMutation extends Mutation {
 }
 
 export class DeleteMutation extends Mutation {
-  readonly key
+  readonly id
   
   constructor(arg: DeleteMutationCrg) {
     super(arg)
-    this.key = arg.key
+    this.id = arg.itemId
   }
   
   get type() {

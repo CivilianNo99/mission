@@ -1,0 +1,7 @@
+// Body, and sometimes html, have default marging,and sometimes,
+// default marging as well. Get ride of it.
+
+:root, body {
+  padding: 0;
+  margin: 0;
+}
