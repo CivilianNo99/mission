@@ -1,2 +1,2 @@
-export { IntervalRecurrer as Interval } from './interval/class.ts'
-export * from './interval/typings.ts'
+export { DurationRecurrer as DurationRecurrer } from './duration/class.ts'
+export * from './duration/typings.ts'

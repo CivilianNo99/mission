@@ -3,13 +3,13 @@ import * as Recurrer from './recurrer.ts'
 import * as FnRecurrer from './fn.ts'
 import * as TimesRecurrer from './times.ts'
 import * as IntervalRecurrer from './interval.ts'
-import * as DailyRecurrer from './daily.ts'
-import * as WeeklyRecurrer from './weekly.ts'
+// import * as DailyRecurrer from './daily.ts'
+// import * as WeeklyRecurrer from './weekly.ts'
 
 export enum Kind {
   Fn,
   Times,
-  Interval,
+  Duration,
   Daily,
   Weekly,
 }
@@ -21,14 +21,14 @@ function isTimesRecurrerJsonRepr(jsonRepr: Recurrer.JsonRepr): jsonRepr is Times
   return jsonRepr.kind === Kind.Times
 }
 function isIntervalRecurrerJsonRepr(jsonRepr: Recurrer.JsonRepr): jsonRepr is IntervalRecurrer.JsonRepr {
-  return jsonRepr.kind === Kind.Interval
+  return jsonRepr.kind === Kind.Duration
 }
-function isDailyRecurrerJsonRepr(jsonRepr: Recurrer.JsonRepr): jsonRepr is DailyRecurrer.JsonRepr {
-  return jsonRepr.kind === Kind.Daily
-}
-function isWeeklyRecurrerJsonRepr(jsonRepr: Recurrer.JsonRepr): jsonRepr is WeeklyRecurrer.JsonRepr {
-  return jsonRepr.kind === Kind.Weekly
-}
+// function isDailyRecurrerJsonRepr(jsonRepr: Recurrer.JsonRepr): jsonRepr is DailyRecurrer.JsonRepr {
+//   return jsonRepr.kind === Kind.Daily
+// }
+// function isWeeklyRecurrerJsonRepr(jsonRepr: Recurrer.JsonRepr): jsonRepr is WeeklyRecurrer.JsonRepr {
+//   return jsonRepr.kind === Kind.Weekly
+// }
 // function isFnRecurrerNewArg(arg: Recurrer.NewArg): arg is FnRecurrer.NewArg {
 //   return arg.kind === Kind.Fn
 // }
@@ -40,18 +40,18 @@ function isWeeklyRecurrerJsonRepr(jsonRepr: Recurrer.JsonRepr): jsonRepr is Week
 // }
 
 export function initialize(jsonRepr: Recurrer.JsonRepr, action: FnRecurrer.Apply): Recurrer.Recurrer {
-  if (isWeeklyRecurrerJsonRepr(jsonRepr)) {
-    return new WeeklyRecurrer.Weekly({
-      lastWeek: new Temporal.Instant(BigInt(jsonRepr.lastWeek)),
-      recurrer: initialize(jsonRepr.recurrer, action)
-    })
-  }
-  if (isDailyRecurrerJsonRepr(jsonRepr)) {
-    return new DailyRecurrer.Daily({
-      lastDay: jsonRepr.lastDay,
-      recurrer: initialize(jsonRepr.recurrer, action)
-    })
-  }
+  // if (isWeeklyRecurrerJsonRepr(jsonRepr)) {
+  //   return new WeeklyRecurrer.Weekly({
+  //     timeLastApply: new Temporal.Instant(BigInt(jsonRepr.lastWeek)),
+  //     recurrer: initialize(jsonRepr.recurrer, action)
+  //   })
+  // }
+  // if (isDailyRecurrerJsonRepr(jsonRepr)) {
+  //   return new DailyRecurrer.Daily({
+  //     timeLastApply: jsonRepr.timeLastApply,
+  //     recurrer: initialize(jsonRepr.recurrer, action)
+  //   })
+  // }
   
   if (isTimesRecurrerJsonRepr(jsonRepr)) {
     return new TimesRecurrer.Times({
@@ -61,14 +61,14 @@ export function initialize(jsonRepr: Recurrer.JsonRepr, action: FnRecurrer.Apply
   }
 
   if (isIntervalRecurrerJsonRepr(jsonRepr)) {
-    return new IntervalRecurrer.Interval({
-      interval: jsonRepr.interval,
-      prevApply: jsonRepr.prevApply,
+    return new IntervalRecurrer.DurationRecurrer({
+      duration: Temporal.Duration.from(jsonRepr.interval),
       recurrer: initialize(jsonRepr.recurrer, action),
+      timeLastApply: Temporal.Instant.from(jsonRepr.timeLastApply),
     })
   }
 
-  return new FnRecurrer.Fn(action)
+  return new FnRecurrer.Fn()
 }
 
 // export function create(arg: Recurrer.Crg, action: FnRecurrer.Apply): Recurrer.Recurrer {

@@ -1,40 +1,66 @@
-import { Now } from '/utility/time.ts'
 import { Habit } from './habit.ts'
-import { store as HABITS_STORE } from './store.ts'
-import { TASKS_STORE as TASKS_STORE } from '/db/tasks/store.ts'
-import * as Recurrers from '/db/recurrers.ts'
-import * as TaskTemplates from '/db/task-templates.ts'
-import * as DueTemplates from '/db/due-templates.ts'
+import { Temporal } from 'npm:@js-temporal/polyfill'
+import { HABITS_STORE } from './store.ts'
+import { DurationRecurrer } from '/db/recurrers/interval.ts'
+import { SomeActionOneTimeTaskTemplate } from '/db/task-templates.ts'
 
-const habit = new Habit({
-  id: '90',
-  
-  recurrer: <Recurrers.Interval.JsonRepr> {
-    kind: Recurrers.Kind.Interval,
-    /** five seconds */
-    interval: 1000 * 5,
-    prevApply: Now(),
-    recurrer: <Recurrers.Fn.JsonRepr> {
-      kind: Recurrers.Kind.Fn
-    }
-  },
+let now = new Temporal.PlainDateTime(2023, 10, 7)
+  .toZonedDateTime("UTC")
+  .toInstant()
 
-  taskTemplate: <TaskTemplates.SingleActionTask.JsonRepr> {
-    id: '78',
-    kind: TaskTemplates.Kind.SingleActionTaskTemplate,
+const habit = Habit.new({
+  // Repeat this task every five seconds
+  recurrer: DurationRecurrer.new({
+    now,
+    duration: Temporal.Duration.from({
+      hours: 1
+    })
+  }),
+
+  taskTemplate: SomeActionOneTimeTaskTemplate.new({
+    timeDue: new Temporal.Duration(0, 0, 0, 0, 0, 3),
+    timeStale: new Temporal.Duration(0, 0, 0, 0, 0, 3),
     description: 'Wash your teeth',
-    creationInstant: Now(),
-    due: <DueTemplates.DueAfterDurationTemplate.JsonRepr> {
-      kind: DueTemplates.Kind.DueAfterDurationTemplate,
-      /** Five minutes */
-      dueAfter: 1000 * 60 * 5,
-    }
-  }
+  })
 })
 
 HABITS_STORE.addOne(habit)
 
-// Hack to keep the process from exiting
 setInterval(() => {
-  habit.recurrer.apply()
+  now = now.add(new Temporal.Duration(0, 0, 0, 0, 3))
+  habit.recur(now)
+  
 }, 1000 * 5);
+// new Promise(resolve => {
+
+// })
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)
+// habit.recur(now)

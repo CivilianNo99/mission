@@ -13,4 +13,8 @@ export class Store<T extends Item> {
   async findMany(itemIds: Id[]): Promise<T[]> {
     return []
   }
+
+  * items(): Generator<T> {
+
+  }
 }

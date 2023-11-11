@@ -1,0 +1,45 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths" : {
+      "db/*": ["./db/*"],
+      "/db/*": ["./db/*"],
+      "npm:*": ["./node_modules/*"],
+    },
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "resolveJsonModule": true,
+    /**
+     * Typecheck JS in `.svelte` and `.js` files by default.
+     * Disable checkJs if you'd like to use dynamic types in JS.
+     * Note that setting allowJs false does not prevent the use
+     * of JS in `.svelte` files.
+     */
+    "allowJs": true,
+    "checkJs": true,
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "noEmit": true,
+  },
+  "include": [
+    "db/**/*.d.ts", 
+    "db/**/*.ts", 
+    "db/**/*.js", 
+    "db/**/*.svelte",
+
+    "db/obj.ts",
+
+    "ui/**/*.d.ts", 
+    "ui/**/*.ts", 
+    "ui/**/*.js", 
+    "ui/**/*.svelte",
+
+    "utility/**/*.d.ts", 
+    "utility/**/*.ts", 
+    "utility/**/*.js", 
+    "utility/**/*.svelte",
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

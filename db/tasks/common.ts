@@ -1,7 +1,8 @@
 export enum Kind {
-  SingleActionTask,
+  SomeActionOneTimeTask,
   CheckboxList,
   RadioList,
   Timer,
   Rundown,
+  SameActionMultipleTimesTask,
 }

@@ -13,11 +13,11 @@ function isSingleActionTaskTemplateJsonRepr(jsonRepr: TaskTemplate.JsonRepr): js
 
 export function initialize(jsonRepr: TaskTemplate.JsonRepr) {
   if (isSingleActionTaskTemplateJsonRepr(jsonRepr)) {
-    return new SingleActionTaskTemplate.SingleActionTaskTemplate({
+    return new SingleActionTaskTemplate.SomeActionOneTimeTaskTemplate({
       id: jsonRepr.id,
       description: jsonRepr.description,
-      dueTemplate: DueTemplates.initialize(jsonRepr.dueTemplate),
-      creationInstant: Temporal.Instant.from(jsonRepr.creationInstant),
+      timeDue: DueTemplates.initialize(jsonRepr.timeDue),
+      timeCreated: Temporal.Instant.from(jsonRepr.timeCreated),
     })
   }
 

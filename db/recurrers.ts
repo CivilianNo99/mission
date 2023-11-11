@@ -1,4 +1,5 @@
 export * from './recurrers/common.ts'
 export * as Fn from './recurrers/fn.ts'
 export * as Times from './recurrers/times.ts'
-export * as Interval from './recurrers/interval.ts'
+export * as interval from './recurrers/interval.ts'
+export { DurationRecurrer } from './recurrers/interval.ts'

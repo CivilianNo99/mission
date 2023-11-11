@@ -1,18 +1,19 @@
+import { Temporal } from 'npm:@js-temporal/polyfill'
 import { Kind } from "../common.ts"
-import { Recurrer } from "../recurrer.ts"
-import { Apply, JsonRepr } from "./typings.ts"
+import { Action, Recurrer } from "../recurrer.ts"
+import { JsonRepr } from "./typings.ts"
 
 export class FnRecurrer extends Recurrer {
-  constructor(readonly apply: Apply) {
+  constructor() {
     super()
-  }
-  
-  static new(action: Apply) {
-    return new FnRecurrer(action)
   }
   
   get kind() {
     return Kind.Fn
+  }
+  
+  apply(now: Temporal.Instant, action: Action) {
+    return action(now)
   }
   
   jsonify(): JsonRepr {
@@ -20,4 +21,10 @@ export class FnRecurrer extends Recurrer {
       kind: Kind.Fn
     }
   }
+
+  static new() {
+    return new FnRecurrer()
+  }
 }
+
+export const FN_RECURRER = FnRecurrer.new()

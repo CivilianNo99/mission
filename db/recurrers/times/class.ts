@@ -1,5 +1,6 @@
 import { Kind } from "../common.ts"
-import { range } from "/utility/ulib.ts"
+import { Action } from '../recurrer/typings.ts'
+import { Temporal } from 'npm:@js-temporal/polyfill'
 import { Recurrer } from "../recurrer.ts"
 import { Crg, JsonRepr } from "./typings.ts"
 
@@ -21,9 +22,9 @@ export class TimesRecurrer extends Recurrer {
     return new TimesRecurrer({ times, recurrer })
   }
 
-  async apply() {
-    for (const _ of range(this.times)) {
-      await this.recurrer.apply()
+  async apply(now: Temporal.Instant, action: Action) {
+    for (let i = 0; i < this.times; i++) {
+      await this.recurrer.apply(now, action)
     }
   }
 
