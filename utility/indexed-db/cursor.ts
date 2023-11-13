@@ -15,7 +15,7 @@ export class Cursor<T extends Obj> {
   }
   
   get value() {
-    return this.cursor.value as T
+    return this.store.initializer(this.cursor.value)
   }
 
   continue() {

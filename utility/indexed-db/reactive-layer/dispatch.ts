@@ -1,7 +1,7 @@
 import type { MaybePromise } from "utility/ulib";
 import type { Obj } from "../obj";
 import type { Store } from "../store";
-import { AddMutation, PutMutation, type Mutation, DeleteMutation, ClearMutation, createPutMutation, createAddMutation, createClearMutation, createDeleteMutation } from "./mutations";
+import { type Mutation, createPutMutation, createAddMutation, createClearMutation, createDeleteMutation } from "./mutations";
 import { createGetAllQuery, createGetManyQuery, createGetOneQuery, type Query } from "./queries";
 
 const queries: Query<any>[] = []
@@ -77,7 +77,7 @@ export function queryOne<T extends Obj>(
   
   ;(async () => {
     try {
-      query.set(await cb())
+      query.update(await cb())
     } catch (error) {
       // TODO(me): Handle the error more gracfully.
       console.error(error)
@@ -92,7 +92,7 @@ export function queryMany<T extends Obj>(store: Store<T>, itemIds: string[], cb:
   
   ;(async () => {
     try {
-      query.set(await cb())
+      query.update(await cb())
     } catch (error) {
       // TODO(me): Handle the error more gracfully.
       console.error(error)
@@ -107,7 +107,7 @@ export function queryAll<T extends Obj>(store: Store<T>, cb: Cb<T[]>) {
   
   ;(async () => {
     try {
-      query.set(await cb())
+      query.update(await cb())
     } catch (error) {
       // TODO(me): Handle the error more gracfully.
       console.error(error)

@@ -64,6 +64,12 @@ User can create a number of clone todo items when the original item is deleted.
 
 User can create a number of clone todo items one time every specified period of time passes starting at a particular point in time.
 
+# Feature
+add labels.
+there are four labels by default: 
+important unimportant needs-to-be-done-quickly
+needs-not-to-be-done-quickly
+
 # More features.
 # todo
 description: cut your nails 

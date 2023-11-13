@@ -1,8 +1,10 @@
+// TODO(me): This module is not complete
+
 import { Kind } from "../common.ts"
 import { Temporal } from 'npm:@js-temporal/polyfill'
-import { FN_RECURRER } from "../fn.ts"
-import { Crg, JsonRepr, NewArg, NewDailyArg, NewWeeklyArg } from "./typings.ts"
-import { Action, Recurrer } from "../recurrer.ts"
+import type { Crg, JsonRepr, NewArg, NewDailyArg } from "./typings"
+import { type Action, Recurrer } from "../Recurrer"
+import { IdentityRecurrer } from "../Identity/class.ts"
 
 export class DurationRecurrer extends Recurrer {
   private recurrer: Recurrer
@@ -37,11 +39,11 @@ export class DurationRecurrer extends Recurrer {
     }
   }
 
-  jsonify(): JsonRepr {
+  toJSON(): JsonRepr {
     return {
       kind: this.kind,
       interval: this.duration.toString(),
-      recurrer: this.recurrer.jsonify(),
+      recurrer: this.recurrer.toJSON(),
       timeLastApply: this.timeLastApply.toString(),
     }
   }
@@ -53,12 +55,13 @@ export class DurationRecurrer extends Recurrer {
    * starting from {@param from}.
    */
   static new({ duration, now, recurrer, from }: NewArg) {
+    now ??= Temporal.Now.instant()
     from ??= now
     from = now.subtract(duration).add(now.until(from))
     
     return new DurationRecurrer({
       duration: duration, 
-      recurrer: recurrer ?? FN_RECURRER,
+      recurrer: recurrer ?? IdentityRecurrer.INSTANCE,
       timeLastApply: from,
     })
   }

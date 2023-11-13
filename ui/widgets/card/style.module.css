@@ -1,0 +1,16 @@
+.card {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 2rem;
+  padding: .2rem 1rem;
+  box-shadow: #0000003d 5px 5px 0;
+  border: 1px solid rgba(0, 0, 0, 0.397);
+}
+
+.head {
+  
+}
+
+.separator {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.397);
+}

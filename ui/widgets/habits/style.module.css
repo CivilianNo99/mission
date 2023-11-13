@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.habits {
+  gap: 2rem;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.habits > button {
+  display: block;
+}
+
+.habits > .list {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 2rem;
+}
+/* .tasks {
+  gap: 1.1rem;
+  display: flex;
+  flex-flow: column nowrap;
+
+  max-width: 500px;
+} */

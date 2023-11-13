@@ -1,5 +1,5 @@
-import { Temporal } from 'npm:@js-temporal/polyfill'
-import * as Recurrer from '../recurrer.ts'
+import type { Temporal } from 'npm:@js-temporal/polyfill'
+import type * as Recurrer from '../Recurrer'
 
 export interface Crg extends Recurrer.Crg {
   duration: Temporal.Duration
@@ -7,7 +7,7 @@ export interface Crg extends Recurrer.Crg {
   timeLastApply: Temporal.Instant
 }
 export interface NewArg extends Recurrer.NewArg {
-  now: Temporal.Instant
+  now?: Temporal.Instant
   from?: Temporal.Instant
   // offset?: Temporal.Duration
   duration: Temporal.Duration

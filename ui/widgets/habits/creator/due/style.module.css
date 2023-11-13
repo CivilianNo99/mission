@@ -1,0 +1,45 @@
+.head {
+  display: flex;
+  flex-flow: row nowrap;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.411);
+}
+
+.btn {
+  background-color: transparent;
+  border: 0;
+  /* padding: .7rem; */
+  /* color: rgba(214, 214, 214, 0.637); */
+  border: 2px solid rgba(0, 0, 0, 0.411);
+  /* padding: .2rem .9rem; */
+  border-radius: 0;
+
+    
+  padding: .2rem 1rem;
+  box-shadow: #0000003d 5px 5px 0;
+  border: 1px solid rgba(0, 0, 0, 0.397);
+} 
+
+.component {
+  /* display: flex; */
+  /* flex-flow: row nowrap; */
+  /* align-items: center; */
+  padding: 1rem;
+  box-shadow: #0000003d 5px 5px 0;
+  border: 1px solid rgba(0, 0, 0, 0.397);
+  /* gap: 1rem; */
+}
+
+.component p, .component label {
+  margin: 0;
+}
+
+.component .custom {
+  margin-left: 4rem;
+}
+
+.cancel {
+  display: block;
+  width: 2rem;
+  background: transparent;
+  border: 0;
+}

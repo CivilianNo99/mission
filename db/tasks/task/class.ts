@@ -1,9 +1,9 @@
 import { Id } from '/db/id.ts'
 import { Kind } from '../common.ts'
-import { Null } from '/utility/ulib.ts'
 import { Temporal } from 'npm:@js-temporal/polyfill'
 import { timeHasCome } from '/utility/time.ts'
-import { Crg, JsonRepr } from './typings.ts'
+import type { Null } from '/utility/ulib.ts'
+import type { Crg, JsonRepr } from './typings.ts'
 
 export abstract class Task {
   readonly id: Id
@@ -41,6 +41,32 @@ export abstract class Task {
     return !this.isComplete && this.timeStale !== null && timeHasCome(this.timeStale)
   }
 
+  // /** 
+  //  * Whether the user succeeded at this `Task`.
+  //  * 
+  //  * The user will have succeeded at this `Task` if he has performed the 
+  //  * action as many times as required before the `Task` expired.
+  //  */
+  // get isSuccess() {
+  //   return this.isComplete && !this.isStale
+  // }
+  // /** 
+  //  * Whether the user has failed at this `Task`.
+  //  * 
+  //  * The user will have failed at this `Task` if the `Task` expired before
+  //  * he has performed the action as many times as required.
+  //  */
+  // get isFailure() {
+  //   return this.isStale
+  //   // return !this.isComplete && 
+  //   if (this.timeCompleted === null) {
+  //     return this. 
+  //   }
+
+  //   return this.expiry.isActiveSince(this.timeCompleted)
+  // }
+  
+  
   // isDueIn(duration: Temporal.Duration) {
   //   return !this.isComplete && this.timeDue.isActiveIn(duration)    
   // }
@@ -49,7 +75,7 @@ export abstract class Task {
   //   return !this.isComplete && this.timeDue.isActiveSince(instant)    
   // }
 
-  jsonify(): JsonRepr {
+  toJSON(): JsonRepr {
     return {
       id: this.id,
       kind: this.kind,

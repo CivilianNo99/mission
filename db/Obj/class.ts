@@ -1,5 +1,5 @@
 import { Id } from '/db/id.ts'
-import { Crg, JsonRepr } from './typings.ts'
+import type { Crg, JsonRepr } from './typings.ts'
 
 export class Obj {
   readonly id: Id
@@ -8,7 +8,7 @@ export class Obj {
     this.id = crg.id
   }
 
-  jsonify(): JsonRepr {
+  toJSON(): JsonRepr {
     return {
       id: this.id,
     }

@@ -1,17 +1,18 @@
 import { Id } from '/db/id.ts'
 import { Kind } from '../common.ts'
 import { Temporal } from 'npm:@js-temporal/polyfill'
-import { Null } from '/utility/ulib.ts'
+import type { Null } from '/utility/ulib.ts'
 
 export interface Crg {
   id: Id
-  timeDue?: Null<Temporal.Instant>
-  timeStale?: Null<Temporal.Instant>
+  timeDue: Null<Temporal.Instant>
+  timeStale: Null<Temporal.Instant>
   description: string
   timeCreated: Temporal.Instant
   timeCompleted: Null<Temporal.Instant>
 }
 export interface NewArg {
+  now?: Temporal.Instant
   id?: Id
   timeDue?: Null<Temporal.Instant>
   timeStale?: Null<Temporal.Instant>

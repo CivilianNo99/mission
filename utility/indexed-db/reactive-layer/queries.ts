@@ -52,7 +52,7 @@ export class Query<Value> implements Observable<Value> {
   onClear(mutation: ClearMutation) {}
   onDelete(mutation: DeleteMutation) {}
 
-  set(value: Value): void {
+  update(value: Value): void {
     this.value = value
 
     for (const [_, subscriptor] of this.subscriptions) {
@@ -88,23 +88,23 @@ export class GetOneQuery<Value extends Obj> extends Query<Value | null> {
 
   onDelete(mutation: DeleteMutation): void {
     if (this.id == mutation.id) {
-      this.set(null)
+      this.update(null)
     }
   }
 
   onClear(mutation: ClearMutation): void {
-    this.set(null)
+    this.update(null)
   }
 
   onAdd(mutation: AddMutation<Value>): void {
     if (mutation.value.id === this.id) {
-      this.set(mutation.value)
+      this.update(mutation.value)
     }
   }
 
   onPut(mutation: PutMutation<Value>): void {
     if (mutation.value.id === this.id) {
-      this.set(mutation.value)
+      this.update(mutation.value)
     }
   }
 }
@@ -117,40 +117,40 @@ export class GetManyQuery<Value extends Obj> extends Query<Value[]> {
   }
 
   onClear(mutation: ClearMutation): void {
-    this.set([])
+    this.update([])
   }
 
   onDelete(mutation: DeleteMutation): void {
     if (this.ids.includes(mutation.id)) {
-      this.set(this.value.filter(item => item.id !== mutation.id))
+      this.update(this.value.filter(item => item.id !== mutation.id))
     }
   }
 
   onAdd(mutation: AddMutation<Value>): void {
     if (this.ids.includes(mutation.value.id)) {
-      this.set([ ...this.value, mutation.value ])
+      this.update([ ...this.value, mutation.value ])
     }
   }
   onPut(mutation: PutMutation<Value>): void {
     if (this.ids.includes(mutation.value.id)) {
-      this.set(put(this.value, mutation.value))
+      this.update(put(this.value, mutation.value))
     }
   }
 }
 export class GetAllQuery<T extends Obj> extends Query<T[]> {
   onAdd(mutation: AddMutation<any>): void {
-    this.set([ ...this.value, mutation.value ])
+    this.update([ ...this.value, mutation.value ])
   }
   onPut(mutation: PutMutation<T>): void {
-    this.set(put<T>(this.value, mutation.value))
+    this.update(put<T>(this.value, mutation.value))
   }
   
   onClear(mutation: ClearMutation): void {
-    this.set([])
+    this.update([])
   }
   
   onDelete(mutation: DeleteMutation): void {
-    this.set(del<T>(this.value, mutation.id))
+    this.update(del<T>(this.value, mutation.id))
   }
 }
 

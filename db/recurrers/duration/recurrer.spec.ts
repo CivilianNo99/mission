@@ -1,15 +1,17 @@
 import { Temporal } from 'npm:@js-temporal/polyfill'
-import { IntervalRecurrer } from "./class.ts"
+import { DurationRecurrer } from "./class.ts"
 
 
-const recurrer = IntervalRecurrer.new(
-  new Temporal.Duration(0, 0, 0, 0, 0, 0, 10)
-)
-
-await new Promise(resolve => {
-  setTimeout(resolve, 1000 * 100);
+const recurrer = DurationRecurrer.new({
+  now:  Temporal.Now.instant(),
+  duration: new Temporal.Duration(0, 0, 0, 0, 0, 1)
 })
 
-recurrer.apply(Temporal.Now.instant(), (now) => {
-  console.log("Now: ", now.toString())
-})
+function apply() {
+  console.log("apply().")
+  recurrer.apply(Temporal.Now.instant(), (now) => {
+    console.log("recurrer.apply().")
+  })
+}
+
+setInterval(apply, 1000 * 5)

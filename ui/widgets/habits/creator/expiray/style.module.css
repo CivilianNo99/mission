@@ -1,0 +1,7 @@
+.component h5, .component p {
+  margin: 0;
+}
+
+.component .custom {
+  margin-left: 4rem;
+}

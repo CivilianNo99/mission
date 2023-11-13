@@ -1,8 +1,8 @@
 import { Kind } from "../common.ts"
-import { Action } from '../recurrer/typings.ts'
 import { Temporal } from 'npm:@js-temporal/polyfill'
-import { Recurrer } from "../recurrer.ts"
-import { Crg, JsonRepr } from "./typings.ts"
+import { Recurrer } from "../Recurrer"
+import type { Action } from '../Recurrer'
+import type { Crg, JsonRepr } from "./typings.ts"
 
 export class TimesRecurrer extends Recurrer {
   private readonly times: number
@@ -28,11 +28,11 @@ export class TimesRecurrer extends Recurrer {
     }
   }
 
-  jsonify(): JsonRepr {
+  toJSON(): JsonRepr {
     return {
       kind: this.kind,
       times: this.times,
-      recurrer: this.recurrer.jsonify(),
+      recurrer: this.recurrer.toJSON(),
     }
   }
 }

@@ -1,46 +1,54 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./",
     "paths" : {
       // "db/*": ["./db/*"],
+      "/*": ["./*"],
+      "/db": ["./db/index.ts"],
       "/db/*": ["./db/*"],
       "/utility/*": ["./utility/*"],
       "npm:*": ["./node_modules/*"],
     },
-    "target": "ESNext",
+
+    "jsxImportSource": "react",
+    "target": "ES2020",
     "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "resolveJsonModule": true,
-    /**
-     * Typecheck JS in `.svelte` and `.js` files by default.
-     * Disable checkJs if you'd like to use dynamic types in JS.
-     * Note that setting allowJs false does not prevent the use
-     * of JS in `.svelte` files.
-     */
-    "allowJs": true,
-    "checkJs": true,
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "db/**/*.d.ts", 
-    "db/**/*.ts", 
-    "db/**/*.js", 
-    "db/**/*.svelte",
+    "./db/**/*.d.ts", 
+    "./db/**/*.ts", 
+    "./db/**/*.js", 
+    "./db/**/*.svelte",
 
-    "db/obj.ts",
+    "./db/Obj/index.ts",
 
-    "ui/**/*.d.ts", 
-    "ui/**/*.ts", 
-    "ui/**/*.js", 
-    "ui/**/*.svelte",
+    "./ui/**/*.d.ts", 
+    "./ui/**/*.ts", 
+    "./ui/**/*.tsx", 
+    "./ui/**/*.js", 
+    "./ui/**/*.svelte",
 
-    "utility/**/*.d.ts", 
-    "utility/**/*.ts", 
-    "utility/**/*.js", 
-    "utility/**/*.svelte",
+    "./utility/**/*.d.ts", 
+    "./utility/**/*.ts", 
+    "./utility/**/*.js", 
+    "./utility/**/*.svelte",
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

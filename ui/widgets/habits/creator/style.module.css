@@ -1,0 +1,38 @@
+.component {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: .5rem;
+  width: 100%;
+}
+
+.btn {
+  border: 0;
+  color: white;
+  border-radius: 5px;
+}
+
+.red {
+  background-color: rgb(145, 12, 12);
+}
+.blue {
+  background-color: rgb(12, 65, 145);
+}
+
+.textarea {
+  display: block;
+  /* width: 100%; */
+  min-width: 400px;
+  min-height: 5rem;
+  border: 2px solid rgba(0, 0, 0, 0.411);
+  padding: .5rem;
+}
+
+.group {
+  /* display: flex;
+  flex-flow: row nowrap; */
+
+}
+.group :nth-child(1) {
+  /* width: 30%; */
+  margin: 0;
+}

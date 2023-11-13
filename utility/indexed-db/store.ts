@@ -6,7 +6,7 @@ import { dispatchAdd, dispatchClear, dispatchDelete, dispatchPut, queryAll, quer
 
 
 function put<T extends Obj>(store: IDBObjectStore, item: T, key?: IDBValidKey) {
-  return promisify(store.put(item, key))
+  return promisify(store.put(item.toJSON(), key))
 }
 function get<T extends Obj>(store: IDBObjectStore, query: IDBValidKey | IDBKeyRange) {
   return promisify<T | undefined>(store.get(query))
@@ -27,7 +27,7 @@ function del(store: IDBObjectStore, query: IDBValidKey | IDBKeyRange) {
   return promisify(store.delete(query))
 }
 function add<T extends Obj>(store: IDBObjectStore, item: T, key?: IDBValidKey) {
-  return promisify(store.add(item, key))
+  return promisify(store.add(item.toJSON(), key))
 }
 
 export interface StoreCrg {
@@ -36,17 +36,21 @@ export interface StoreCrg {
   database: Database
   // autoIncrement?: boolean
 }
+type Initializer<T> = (arg: any) => T
+
 export class Store<T extends Obj> {
   readonly name
   readonly database
   readonly keyPath
   readonly autoIncrement
+  readonly initializer
 
-  constructor(arg: StoreCrg) {
-    this.name = arg.name
+  constructor(name: string, database: Database, initializer: Initializer<T>) {
+    this.name = name
     this.keyPath = "id"
-    this.database = arg.database
+    this.database = database
     this.autoIncrement = false
+    this.initializer = initializer
     this.database.registerStore(this)
   }
   
@@ -140,7 +144,10 @@ export class Store<T extends Obj> {
    * Returns the item identified by {@param id}, or `null`. 
   */
   async one(id: string) {
-    return (await get<T>(this.query(), id)) ?? null
+    const item = await get<T>(this.query(), id)
+    return item != null 
+      ? this.initializer(item)
+      : null
   }
   /** 
    * Returns the items identified by {@param ids}.

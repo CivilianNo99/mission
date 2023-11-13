@@ -1,4 +1,4 @@
-import * as Recurrer from "../recurrer.ts"
+import * as Recurrer from "../Recurrer"
 
 export interface Crg extends Recurrer.Crg {
   times: number

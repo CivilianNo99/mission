@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: #0000003d 5px 5px 0;
+  border: 1px solid rgba(0, 0, 0, 0.397);
+  gap: 1rem;
+}
+
+.wrapper :nth-child(1) {
+  display: block;
+  flex-grow: 1;
+}
+
+.wrapper :nth-child(2) {
+  display: block;
+  width: 3rem;
+}
