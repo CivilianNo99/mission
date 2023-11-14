@@ -24,10 +24,12 @@ export class Habit {
   */
   description: string
   recurrer: Recurrer.Recurrer
+  title: string
   task: TaskTemplate.TaskTemplate
 
   constructor(arg: Crg) {
     this.id = arg.id
+    this.title = arg.title
     this.task = arg.task
     this.recurrer = arg.recurrer
     this.description = arg.description
@@ -47,6 +49,7 @@ export class Habit {
       task: this.task.toJSON(),
       recurrer: this.recurrer.toJSON(),
       description: this.description,
+      title: this.title,
     }
   }
 
@@ -54,8 +57,9 @@ export class Habit {
     return new Habit({
       id: arg.id || Id(),
       task: arg.task,
+      title: arg.title,
       recurrer: arg.recurrer,
-      description: arg.description,
+      description: arg.description ?? '',
     })
   }
 
@@ -63,6 +67,7 @@ export class Habit {
     return new Habit({
       id: json.id,
       task: TaskTemplates.initialize(json.task),
+      title: json.title,
       recurrer: Recurrers.initialize(json.recurrer),
       description: json.description,
     })

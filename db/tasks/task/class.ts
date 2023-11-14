@@ -15,6 +15,7 @@ export abstract class Task {
    * The time when the task is stale. This is always later than `this.timeDue`.
    */
   timeStale: Null<Temporal.Instant>
+  title: string
   description: string
   timeCreated: Temporal.Instant
   timeCompleted: Null<Temporal.Instant>
@@ -25,6 +26,7 @@ export abstract class Task {
     this.timeStale = arg.timeStale ?? null
     this.description = arg.description
     this.timeCreated = arg.timeCreated
+    this.title = arg.title
     this.timeCompleted = arg.timeCompleted
   }
 
@@ -79,6 +81,7 @@ export abstract class Task {
     return {
       id: this.id,
       kind: this.kind,
+      title: this.title,
       timeDue: this.timeDue?.toString() ?? null,
       timeStale: this.timeStale?.toString() ?? null,
       description: this.description,

@@ -10,6 +10,7 @@ export abstract class TaskTemplate {
   readonly id: Id
   timeDue: Temporal.Duration | null
   timeStale: Temporal.Duration | null
+  title: string
   description: string
   /** 
    * When this `TaskTemplate` was created. 
@@ -20,6 +21,7 @@ export abstract class TaskTemplate {
     this.id = arg.id
     this.timeDue = arg.timeDue ?? null
     this.timeStale = arg.timeStale ?? null
+    this.title = arg.title
     this.description = arg.description
     this.timeCreated = arg.timeCreated
   }
@@ -35,6 +37,7 @@ export abstract class TaskTemplate {
       timeStale: this.timeStale?.toString() ?? null,
       description: this.description,
       timeCreated: this.timeCreated.toString(),
+      title: this.title,
     }
   }
 }

@@ -1,15 +1,13 @@
 import { Null } from "../ulib";
-import { Habit } from "/db/habits/Habite"
-import { habits } from "/db/habits/store"
 import { $, $state } from "../react"
 import { Store as IDbStore, Obj } from "../indexed-db";
 
 export class Store<T extends Obj> extends IDbStore<T> {
   useOne(id: string) {
-    const [item, wItem] = $state<Null<Habit>>(null)
+    const [item, wItem] = $state<Null<T>>(null)
     
     $([ id ], () => {
-      return habits.oneR(id).subscribe(wItem)
+      return this.oneR(id).subscribe(wItem)
     })
     
     return item

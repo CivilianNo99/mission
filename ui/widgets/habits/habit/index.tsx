@@ -1,6 +1,6 @@
 import { habits } from "/db/habits/store"
-// import MdDeleteForever from "svelte-icons/md/MdDeleteForever.svelte"
 import style from "./style.module.css"
+import { OptionsUI } from "./options"
 
 interface Props {
   id: string
@@ -8,22 +8,18 @@ interface Props {
 export function Habit({ id }: Props) {
   const habit = habits.useOne(id)
 
-  function destroy() {
-    habits.delete(id)
+  if (!habit) {
+    return  (
+      <div className={style.wrapper}>
+        <div>Habit not found</div>
+      </div>
+    )
   }
 
   return (
     <div className={style.wrapper}>
-      {habit
-      ? <>
-          <div>{habit.description}</div>
-          <button onClick={destroy} className="icon">
-            {/* <MdDeleteForever /> */}
-            X
-          </button>
-        </>
-      : <div>Habit not found</div>
-      }
+      <div>{habit.description}</div>
+      <OptionsUI habitId={id} />
     </div>
   )
 }

@@ -2,6 +2,7 @@
 import Tab from "react-bootstrap/Tab"
 import Tabs from "react-bootstrap/Tabs"
 import { Habits } from "./habits"
+import { TasksUI } from "./tasks"
 
 export function Main() {
   return (
@@ -10,8 +11,9 @@ export function Main() {
       className="mb-3"
     >
       <Tab eventKey="tasks" title="Tasks">
-        Tab content for Profile
+        <TasksUI />
       </Tab>
+
       <Tab eventKey="habits" title="Habits">
         <Habits />
       </Tab>

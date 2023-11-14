@@ -10,6 +10,15 @@ export enum TaskVisibility {
   ShowComplete,
 }
 
+// TODO: Allow sorting tasks:
+//   - Aplhabetically ascending
+//   - Aplhabetically descending
+//   - By creation date ascending
+//   - By creation date descending
+//   - By due date ascending
+//   - By due date descending
+//   - By expiary date ascending
+//   - By expiary date descending
 export const tasks = new Store(
   "tasks",
   database,

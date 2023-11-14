@@ -61,7 +61,7 @@ export class SameActionManyTimesTask extends Task {
       id: arg.id || Id(),
       timeDue: arg.timeDue ?? null,
       timeStale: arg.timeStale ?? null,
-      timeCreated: arg.now,
+      timeCreated: arg.now ?? Temporal.Now.instant(),
       description: arg.description,
       timeCompleted: null,
       timesActionPerformed: 0,

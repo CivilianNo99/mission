@@ -8,6 +8,7 @@ export interface Crg {
   timeDue: Null<Temporal.Instant>
   timeStale: Null<Temporal.Instant>
   description: string
+  title: string
   timeCreated: Temporal.Instant
   timeCompleted: Null<Temporal.Instant>
 }
@@ -16,7 +17,8 @@ export interface NewArg {
   id?: Id
   timeDue?: Null<Temporal.Instant>
   timeStale?: Null<Temporal.Instant>
-  description: string
+  title: string
+  description?: string
 }
 export interface JsonRepr {
   id: Id
@@ -24,6 +26,7 @@ export interface JsonRepr {
   timeDue: Null<string>
   timeStale: Null<string>
   description: string
+  title: string
   timeCreated: string
   timeCompleted: Null<string>
 }

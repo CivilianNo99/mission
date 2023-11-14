@@ -1,9 +1,31 @@
-.component {
+.wrap {
   display: flex;
   flex-flow: column nowrap;
   gap: .5rem;
   width: 100%;
+  padding: 2rem;
+  align-items: center;
 }
+
+.inner-wrap {
+  width: 500px;
+}
+
+.group {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+.group > :nth-child(1) {
+  width: 30%;
+}
+.group > :nth-child(2) {
+  width: 70%;
+}
+/* .group > textarea {
+  height: auto;
+} */
 
 .btn {
   border: 0;
