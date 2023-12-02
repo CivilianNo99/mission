@@ -1,0 +1,92 @@
+@use "sass:math";
+
+
+// Breakpoints
+
+$breakpoints: (
+  (width: 280px, infix: "xxs") 
+  (width: 300px, infix: "xs") 
+  (width: 400px, infix: "sm")
+  (width: 576px, infix: "md")
+  (width: 676px, infix: "lg")
+  (width: 768px, infix: "xl") 
+  (width: 992px, infix: "xxl")
+  (width: 1200px, infix: "xxxl")
+);
+
+
+
+// Returns the width of the breakpoint with thte given name
+
+@function get($infix) {
+  @if type-of($infix) != "string" {
+    @error "media.get(): $infix #{$infix} is expected to be a breakpoint name";
+  }
+
+  @if $infix == "all" {
+    @return $breakpoints;
+  }
+
+  @each $point in $breakpoints {
+    @if map-get($point, "infix") == $infix {
+      @return map-get($point, "width");
+    }
+  }
+
+  @error "media.get(): There is no breakpoint named #{$infix}";
+}
+
+
+// Shorthands
+
+@mixin xxs($condition: "min-width") {
+  @media screen and (#{$condition}: get("xxs")) { @content; }
+}
+
+@mixin xs($condition: "min-width") {
+  @media screen and (#{$condition}: get("xs")) { @content; }
+}
+
+@mixin sm($condition: "min-width") {
+  @media screen and (#{$condition}: get("sm")) { @content; }
+}
+
+@mixin md($condition: "min-width") {
+  @media screen and (#{$condition}: get("md")) { @content; }
+}
+
+@mixin lg($condition: "min-width") {
+  @media screen and (#{$condition}: get("lg")) { @content; }
+}
+
+@mixin xl($condition: "min-width") {
+  @media screen and (#{$condition}: get("xl")) { @content; }
+}
+
+@mixin xxl($condition: "min-width") {
+  @media screen and (#{$condition}: get("xxl")) { @content; }
+}
+
+@mixin xxxl($condition: "min-width") {
+  @media screen and (#{$condition}: get("xxxl")) { @content; }
+}
+
+
+// For creating new more exact breakpoints
+
+@mixin between($narrow, $wide) {
+  $narrow: get($narrow);
+  $wide: get($wide);
+
+  @if $narrow > $wide {
+    $tmp: $wide;
+    $wide: $narrow;
+    $narrow: $wide;
+  }
+
+  $between: $narrow + math.div(($wide - $narrow), 2);
+
+  @media (min-width: $between) {
+    @content;
+  }
+}

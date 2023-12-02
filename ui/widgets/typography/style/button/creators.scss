@@ -1,0 +1,131 @@
+$font-family: "Mada", sans-serif;
+$font-weight: 400;
+
+@mixin create($fg: null) {
+  display: inline-block;
+  margin: 0;
+
+  font-family: $font-family;
+  font-weight: $font-weight;
+  text-align: center;
+  text-decoration: none;
+  line-height: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: middle;
+  
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  
+  color: $fg;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  border: 0;
+  
+  user-select: none;
+  cursor: default;
+}
+
+@mixin icon($code-point, $position: "left", $selector: "&::before") {
+  #{$selector} {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: $code-point;
+    
+    @if $position == "left" {
+      margin-right: 0.4em;
+    } @else if $position == "right" {
+      margin-left: 0.4em;
+    } @else if $position == "within" {
+      margin-left: 0.4em;
+      margin-right: 0.4em;
+    }
+  }  
+}
+
+@mixin shape($shape) {
+  @if $shape == "rect" {
+    border-radius: var(--radius-sm);
+  } @else if $shape == "hotdog" {
+    border-radius: 30px;
+  }
+}
+
+@mixin fill($fg, $bg: null) {
+  color: $fg;
+  background-color: $bg;
+}
+
+@mixin size($size, $filled: true) {
+  @if $size == "lg" {
+    @if $filled {
+      font-size: var(--btn-font-size-lg);
+      padding: var(--btn-padding-lg);
+    } @else {
+      font-size: var(--btn-font-size-lg);
+    }
+  }
+  
+  @if $size == "md" {
+    @if $filled {
+      font-size: var(--btn-font-size-md);
+      padding: var(--btn-padding);
+    } @else {
+      font-size: var(--btn-font-size-md);
+    }
+  }
+  
+  @if $size == "sm" {
+    @if $filled {
+      font-size: var(--btn-font-size-sm);
+      padding: var(--btn-padding);
+    } @else {
+      font-size: var(--btn-font-size-sm);
+    }
+  }
+}
+
+@mixin hover($fg, $bg: null) {
+  &:hover {
+    color: $fg;
+    background-color: $bg;
+  }
+}
+
+@mixin activate($fg: null, $bg: null) {
+  cursor: pointer;
+  
+  &:active {
+    color: $fg;
+    background-color: $bg;
+    transform: scale(.95);
+  }
+}
+
+@mixin focus($fg: null, $bg: null, $outline: null) {
+  @if $outline {
+    outline: 0 solid $outline;
+    outline-offset: 5px;
+    
+    &:focus-visible {
+      outline-width: 1px;
+    }
+  }
+  
+  &:focus-visible {
+    color: $fg;
+    background-color: $bg;
+  }
+}
+
+@mixin disable($fg: null, $bg: null, $selector: "[disabled]") {
+  &#{$selector},
+  &#{$selector}:hover,
+  &#{$selector}:focus,
+  &#{$selector}:active {
+    cursor: not-allowed;
+    color: $fg;
+    background-color: $bg;
+  }
+}

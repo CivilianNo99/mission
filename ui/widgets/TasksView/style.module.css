@@ -1,0 +1,12 @@
+.wrap {
+  gap: 2rem;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.tasks {
+  /* gap: 1.1rem; */
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 500px;
+}

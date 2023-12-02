@@ -1,0 +1,25 @@
+export default {} as Record<
+  | "badge"
+  | "primary"
+  | "indigo"
+  | "yellow"
+  | "blue"
+  | "sky"
+  | "purple"
+  | "red"
+  | "pink"
+  | "lime"
+  | "green"
+  | "orange"
+  | "cyan"
+  | "dark"
+  | "darker"
+  | "darkest"
+  | "light"
+  | "lighter"
+  | "lightest"
+  | "sm"
+  | "md"
+  | "lg",
+  string
+>;

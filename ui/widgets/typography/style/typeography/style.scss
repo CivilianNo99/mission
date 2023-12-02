@@ -1,0 +1,188 @@
+@use "sass:map";
+@use "reset";
+@use "fonts";
+@use "mixins";
+@use "variables";
+
+
+*, 
+*::after, 
+*::before {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  text-transform: inherit;
+  text-decoration: inherit;
+  line-height: inherit;
+}
+
+html {
+  // General font sizes
+  --type-scale: 1.067;
+
+  --base-font-size: 1rem;
+  
+  --font-size-1: calc(var(--font-size-2) * var(--type-scale));
+  --font-size-2: calc(var(--font-size-3) * var(--type-scale));
+  --font-size-3: calc(var(--font-size-4) * var(--type-scale));
+  --font-size-4: calc(var(--font-size-5) * var(--type-scale));
+  --font-size-5: calc(var(--font-size-6) * var(--type-scale));
+  --font-size-6: var(--base-font-size);
+  --font-size-7: calc(var(--font-size-6) / var(--type-scale));
+  --font-size-8: calc(var(--font-size-7) / var(--type-scale));
+  --font-size-9: calc(var(--font-size-8) / var(--type-scale));
+  --font-size-10: calc(var(--font-size-9) / var(--type-scale));
+  --font-size-11: calc(var(--font-size-10) / var(--type-scale));
+
+  // Heading
+  --heading-fg: #{map.get(variables.$colors, "heading-fg")};
+  --heading-family: "Mada", sans-serif;
+  --heading-line-height: 1;
+  --heading-margin-top: 1em;
+  --heading-margin-bottom: .5em;
+
+  --heading-size-h1: var(--font-size-1);
+  --heading-size-h2: var(--font-size-2);
+  --heading-size-h3: var(--font-size-3);
+  --heading-size-h4: var(--font-size-4);
+  --heading-size-h5: var(--font-size-5);
+  --heading-size-h6: var(--font-size-6);
+  
+  // Text
+  --text-fg: #{map.get(variables.$colors, "text-fg")};
+  --text-family: "Mada", sans-serif;
+  --text-line-height: 1.35;
+
+  --text-size-lg: var(--font-size-6);
+  --text-size-md: var(--font-size-7);
+  --text-size-sm: var(--font-size-8);
+  --text-size-xs: var(--font-size-9);
+  --text-size-xxs: var(--font-size-10);
+
+  // Paragraph
+  --para-margin-top: .4em;
+  --para-margin-bottom: .9em;
+
+  // Caption
+  --caption-fg: #{map.get(variables.$colors, "caption-fg")};
+  --caption-family: "Mada", sans-serif;
+  --caption-line-height: 1;
+  --caption-size-lg: var(--font-size-7);
+  --caption-size-md: var(--font-size-8);
+  --caption-size-sm: var(--font-size-9);
+  --caption-margin-top: .8em;
+  --caption-margin-bottom: .3em;
+
+  // List
+  --list-padding-left: 1rem;
+  --list-margin-top: .4em;
+  --list-margin-bottom: .9em;
+
+  // Link
+  --link-fg: #{map.get(variables.$colors, "link-fg")};
+  --link-active-fg: #{map.get(variables.$colors, "link-active-fg")};
+  
+  // Selection
+  --selection-fg: #{map.get(variables.$colors, "selection-fg")};
+  --selection-bg: #{map.get(variables.$colors, "selection-bg")};
+
+  // global styles
+  color: var(--text-fg);
+  font-family: var(--text-family);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 100%;
+  text-transform: none;
+  text-decoration: none;
+  line-height: var(--text-line-height);
+}
+
+body {
+  @include mixins.resize($type: "text", $size: "md");
+}
+
+
+// Headings
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+.h { 
+  @include mixins.heading($size: "h6");
+}
+
+.h1 { @include mixins.resize($type: "heading", $size: "h1"); }
+.h2 { @include mixins.resize($type: "heading", $size: "h2"); }
+.h3 { @include mixins.resize($type: "heading", $size: "h3"); }
+.h4 { @include mixins.resize($type: "heading", $size: "h4"); }
+.h5 { @include mixins.resize($type: "heading", $size: "h5"); }
+.h6 { @include mixins.resize($type: "heading", $size: "h6"); }
+
+
+// Text
+
+.text { 
+  @include mixins.text($size: "md"); 
+  &.lg { @include mixins.resize($type: "text", $size: "lg"); }
+  &.md { @include mixins.resize($type: "text", $size: "md"); }
+  &.sm { @include mixins.resize($type: "text", $size: "sm"); }
+  &.xs { @include mixins.resize($type: "text", $size: "xs"); }
+  &.xxs { @include mixins.resize($type: "text", $size: "xxs"); }
+}
+
+
+// Paragraph
+
+p,
+.para { 
+  @include mixins.para($size: "md"); 
+  &.lg { @include mixins.resize($type: "para", $size: "lg"); }
+  &.md { @include mixins.resize($type: "para", $size: "md"); }
+  &.sm { @include mixins.resize($type: "para", $size: "sm"); }
+  &.xs { @include mixins.resize($type: "para", $size: "xs"); }
+  &.xxs { @include mixins.resize($type: "para", $size: "xxs"); }
+}
+
+
+// Other elements
+.caption { 
+  @include mixins.caption(); 
+}
+
+.link { 
+  @include mixins.link(); 
+}
+
+::selection { 
+  @include mixins.selection(); 
+}
+
+.screen-reader-text { 
+  @include mixins.screen-reader-text(); 
+}
+
+.hr { 
+  @include mixins.hr(); 
+}
+
+code { 
+  @include mixins.code(); 
+}
+
+
+// Utilites
+.ul { text-decoration: underline; }
+.lt { text-decoration: line-through; }
+.ol { text-decoration: overline; }
+.it  { font-style: italic; }
+
+.center { text-align: center; }
+.start  { text-align: start; }
+.end    { text-align: end; }
+.left   { text-align: left; }
+.right  { text-align: right; }

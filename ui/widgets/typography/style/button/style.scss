@@ -1,0 +1,79 @@
+@use "./creators";
+@use "./themer";
+@use "./themes";
+
+
+// Custom properties
+
+:root {
+  --btn-padding: .4em .8em;
+  --btn-font-size-sm: var(--text-size-sm);
+  --btn-font-size-md: var(--text-size-md);
+
+  --btn-padding-lg: 0.7em 3em;
+  --btn-font-size-lg: var(--text-size-lg);
+}
+
+
+// Base style
+.btn { 
+  @include creators.create(); 
+  @extend .rect;
+  @extend .md;
+  @extend .filled;
+  @extend .gray;
+}
+
+
+// Shapes
+.rect { @include creators.shape("rect"); }
+.hotdog { @include creators.shape("hotdog"); }
+
+
+// Sizes
+
+.sm {
+  @include creators.size("sm", $filled: false);
+  &.filled { @include creators.size("sm", $filled: true); }
+}
+
+.md {
+  @include creators.size("md", $filled: false);
+  &.filled { @include creators.size("md", $filled: true); }
+}
+
+.lg {
+  @include creators.size("lg", $filled: false);
+  &.filled { @include creators.size("lg", $filled: true); }
+}
+
+
+// Themes
+
+.gray {
+  @extend .btn;
+  @include themer.apply-theme(themes.$gray);
+}
+
+.blue {
+  @extend .btn;
+  @include themer.apply-theme(themes.$blue);
+}
+
+.red {
+  @extend .btn;
+  @include themer.apply-theme(themes.$red);
+}
+
+.lightest {
+  @extend .btn;
+  @include themer.apply-theme(themes.$lightest);
+}
+
+
+// Other
+
+.block {
+  display: block;
+  width: 100%;
+}

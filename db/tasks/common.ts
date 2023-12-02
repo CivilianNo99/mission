@@ -27,6 +27,7 @@ export function initialize(jsonRepr: Task.JsonRepr) {
   if (isSomeActionOneTimeTaskJsonRepr(jsonRepr)) {
     return new SomeActionOneTime.SomeActionOneTime({
       id: jsonRepr.id,
+      title: jsonRepr.title,
       timeDue: jsonRepr.timeDue ? Temporal.Instant.from(jsonRepr.timeDue) : null,
       timeStale: jsonRepr.timeStale ? Temporal.Instant.from(jsonRepr.timeStale) : null,
       isComplete: jsonRepr.isComplete,
@@ -39,6 +40,7 @@ export function initialize(jsonRepr: Task.JsonRepr) {
   if (isSameActionManyTimesTaskJsonRepr(jsonRepr)) {
     return new SameActionManyTimes.SameActionManyTimesTask({
       id: jsonRepr.id,
+      title: jsonRepr.title,
       timeDue: jsonRepr.timeDue ? Temporal.Instant.from(jsonRepr.timeDue) : null,
       timeStale: jsonRepr.timeStale ? Temporal.Instant.from(jsonRepr.timeStale) : null,
       description: jsonRepr.description,

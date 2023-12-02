@@ -1,0 +1,10 @@
+$borderColor: rgba(78, 76, 76, 0.226);
+$borderStyle: solid;
+$borderWidth: 1px;
+$border: $borderWidth $borderStyle $borderColor;
+
+$paddingX: .7rem;
+$paddingY: 1rem;
+$padding: $paddingX $paddingY;
+
+$boxShadow: #0000003d 5px 5px 0;

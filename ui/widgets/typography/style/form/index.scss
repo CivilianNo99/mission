@@ -1,0 +1,111 @@
+@use "/style/colors";
+@use "/style/typeography";
+
+
+@mixin fancy(
+  $type: "input",
+  $placeholdered: true,
+  $active-state: "&:focus",
+  $invalid-state: "&:focus",
+  $disabled-state: "&:disabled",
+) {
+  display: block;
+  height: 2rem;
+  padding: calc(var(--jumbotron-xxs) / 2) var(--jumbotron-xs);
+  background-color: colors.get("lightest");
+  border: 2px solid colors.get("hr-dark");
+  border-radius: var(--radius-sm);
+
+  line-height: 1;
+  margin: 0;
+  outline: 0;
+
+  @if $type == "textarea" {
+    @include typeography.text($size: "md");
+    height: 5rem;
+    padding: calc(var(--jumbotron-sm) / 2) var(--jumbotron-xs);
+    resize: none;
+  }
+
+  @if $type == "select" {
+    appearance: none; 
+  }
+
+  @if $placeholdered {
+    &::placeholder {
+      opacity: .7;
+    }
+  }
+
+  #{$active-state} { 
+    background-color: #fff;
+    border-color: colors.get("sky"); 
+  } 
+  
+  #{$invalid-state} { 
+    background-color: #fff;
+    border-color: colors.get("red");
+  } 
+
+  #{$disabled-state} {
+    color: #33333352;
+    background-color: #cbcbcb33;
+    border-color: transparent;
+  }
+}
+
+@mixin normal($type: "input", $placeholdered: true) {
+  @include typeography.text($size: "md");
+
+  display: block;
+  height: 2rem;
+  padding: calc(var(--jumbotron-xxs) / 2) var(--jumbotron-xs);
+  background-color: colors.get("lightest");
+  border: 2px solid colors.get("hr-dark");
+  border-radius: var(--radius-sm);
+
+  margin: 0;
+  outline: 0;
+
+  @if $type == "textarea" {
+    height: 5rem;
+    padding: calc(var(--jumbotron-sm) / 2) var(--jumbotron-xs);
+    resize: none;
+  }
+
+  @if $type == "select" {
+    line-height: 1;
+    appearance: none; 
+  }
+
+  @if $type == "input" {
+    line-height: 1;
+  }
+
+  @if $placeholdered {
+    &::placeholder {
+      opacity: .7;
+    }
+  }
+}
+
+@mixin active() { 
+  background-color: #fff;
+  border-color: colors.get("sky"); 
+} 
+
+@mixin valid() {
+  background-color: #fff;
+  border-color: colors.get("sky"); 
+}
+
+@mixin invalid() { 
+  background-color: #fff;
+  border-color: colors.get("red");
+} 
+
+@mixin disabled() {
+  color: #33333352;
+  background-color: #cbcbcb33;
+  border-color: transparent;
+}

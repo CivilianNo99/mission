@@ -1,0 +1,29 @@
+@use "sass:map";
+@use "/style/typeography";
+
+
+@mixin create($fg: null, $bg: null) {
+  @include typeography.resize($type: "text", $size: "sm");
+
+  display: inline-flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  padding: 0 var(--jumbotron-xs);
+  margin: 0;
+  
+  font-family: "Mada", sans-serif;
+  vertical-align: middle;
+  line-height: 1.25;
+
+  color: $fg;
+  background-color: $bg;
+  border-radius: var(--radius-sm);
+
+  user-select: none;
+}
+
+@mixin color($theme) {
+  color: map.get($theme, "fg");
+  background-color: map.get($theme, "bg");
+}

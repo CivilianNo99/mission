@@ -1,0 +1,5 @@
+@use "./style.scss" as divider;
+
+.divider {
+  border-bottom: divider.$border;
+}

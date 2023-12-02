@@ -1,0 +1,65 @@
+@use "/style/colors";
+@use "/style/typeography";
+
+
+/*
+* Fancy theme
+*/
+input.fancy,
+select.fancy {
+  line-height: 1;
+  height: 2rem;
+  padding: calc(var(--jumbotron-xxs) / 2) var(--jumbotron-xs);
+}
+
+textarea.fancy { 
+  height: 5rem;
+  padding: calc(var(--jumbotron-sm) / 2) var(--jumbotron-xs);
+  resize: none;
+}
+
+select.fancy { 
+  appearance: none; 
+}
+
+.fancy {
+  @include typeography.text($size: "md");
+
+  display: block;
+  width: 100%;
+  
+  background-color: colors.get("lightest");
+  border: 2px solid colors.get("hr-dark");
+  border-radius: var(--radius-sm);
+
+  margin: 0;
+  outline: 0;
+  
+  &::placeholder {
+    opacity: .9;
+  }
+
+  &:focus { 
+    background-color: #fff;
+    border-color: colors.get("sky"); 
+    
+    &:valid:not(.no-validity-feedback) {
+      border-color: colors.get("sky");
+    }
+  
+    &:invalid:not(.no-validity-feedback) {
+      border-color: colors.get("red");
+    }
+  }
+
+  &.invalid {
+    background-color: #fff;
+    border-color: colors.get("red");
+  }
+
+  &:disabled {
+    color: #33333352;
+    background-color: #cbcbcb33;
+    border-color: transparent;
+  }
+}

@@ -1,13 +1,24 @@
 import React from "react"
-import classnames from "classnames"
-import css from "./style.module.css"
+import css from "./style.module.scss"
 
-type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-
-export function Card(props: Props) {
+export function Card() {
   return (
-    <div {...props} className={classnames(css.card, props.className)}>
-      {/* <div className="separator"></div> */}
+    <div className={css.card}>
+      <div className={css.header}>
+        <p>Task Options</p>
+      </div>
+
+      <div className={css.divider}></div>
+      {/* <div>
+        <p>Hello There</p>
+      </div>
+
+      <div className={css.divider}></div> */}
+
+      <div className={css.footer}>
+        <button>kill</button>
+        <button>die</button>
+      </div>
     </div>
   )
 }

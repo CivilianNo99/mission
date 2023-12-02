@@ -35,10 +35,11 @@ export class SomeActionOneTime extends Task {
   static new(arg: NewArg) {
     return new SomeActionOneTime({
       id: arg.id || Id(),
+      title: arg.title,
       timeDue: arg.timeDue ?? null,
       timeStale: arg.timeStale ?? null,
       isComplete: false,
-      description: arg.description,
+      description: arg.description ?? "",
       timeCreated: arg.now ?? Temporal.Now.instant(),
       timeCompleted: null,
     })

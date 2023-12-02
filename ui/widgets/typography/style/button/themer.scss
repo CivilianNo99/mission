@@ -1,0 +1,66 @@
+@use "sass:map";
+@use "creators";
+
+@mixin apply-theme($theme, $overrider: ()) {
+  $theme: map.merge($theme, $overrider);
+  $filled: map.get($theme, "filled");
+
+  @if $filled and map.get($theme, "normal-filled") {
+    @include creators.fill(
+      map.get($theme, "fill-fg"), 
+      map.get($theme, "fill-bg")
+    );
+  } @else {
+    @include creators.fill(map.get($theme, "fg"));
+  }
+  
+  @if map.get($theme, "interactive") {
+    @if map.get($theme, "hoverable") {
+      @if $filled and map.get($theme, "hover-filled") {
+        @include creators.hover(
+          map.get($theme, "hover-fill-fg"), 
+          map.get($theme, "hover-fill-bg")
+        );
+      } @else {
+        @include creators.hover(map.get($theme, "hover-fg"));
+      }
+    }
+    
+    @if map.get($theme, "activatable") {
+      @if $filled and map.get($theme, "active-filled") {
+        @include creators.activate(
+          map.get($theme, "active-fill-fg"), 
+          map.get($theme, "active-fill-bg")
+        );
+      } @else {
+        @include creators.activate(map.get($theme, "active-fg"));
+      }
+    }
+    
+    @if map.get($theme, "focusable") {
+      @if $filled and map.get($theme, "focus-filled") {
+        @include creators.focus(
+          map.get($theme, "focus-fill-fg"), 
+          map.get($theme, "focus-fill-bg"),
+          map.get($theme, "focus-outline")
+        );
+      } @else {
+        @include creators.focus(
+          map.get($theme, "focus-fg"), 
+          map.get($theme, "focus-outline")
+        );
+      }
+    }
+    
+    @if map.get($theme, "disableable") {
+      @if $filled and map.get($theme, "disabled-filled") {
+        @include creators.disable(
+          map.get($theme, "disabled-fill-fg"), 
+          map.get($theme, "disabled-fill-bg")
+        );
+      } @else {
+        @include creators.disable(map.get($theme, "disabled-fg"));
+      }
+    }
+  }
+}

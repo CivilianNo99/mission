@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react"
 import { Reactor } from "/utility/ui-state/reactor"
 import { Store as CreatorStore } from "../store"
 import css from "../style.module.css"
+import { DurationPicker } from "../../duration-picker"
 
 export class Store {
   titleId = crypto.randomUUID()
@@ -24,6 +25,7 @@ export function SomeActionOneTimeUI({ creator }: { creator: CreatorStore }) {
     <div>
       <Title store={store} />
       <Description store={store} />
+      <DurationPicker />
 
       {/* <div><DueInput /></div>
       <div><Expiary /></div>

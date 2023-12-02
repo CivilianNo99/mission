@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-// import './index.css'
-import {} from "bootstrap/dist/css/bootstrap.css"
-import { AppRouter } from "./widgets/router"
+import { App } from "./widgets/app"
 
 const app = document.getElementById("app")
 if (!app) {
@@ -11,7 +9,6 @@ if (!app) {
 
 ReactDOM.createRoot(app).render(
   <React.StrictMode>
-    {/* <App /> */}
-    <AppRouter />
+    <App />
   </React.StrictMode>,
 )

@@ -1,0 +1,146 @@
+// Imports
+
+@use "media";
+@use "global";
+
+
+// Global styles
+
+@mixin global() {
+  *, 
+  *::after, 
+  *::before { 
+    box-sizing: inherit;
+    scroll-behavior: inherit;
+  }
+
+  html,
+  body,
+  :global(#app-root) {
+    @include grid();
+    @include jumbotron-sizes();
+    @include global.root();
+
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+
+    background-color: var(--document-bg);
+  }
+}
+
+// Containers
+//
+// A container is used to control the width of 
+// a page section across diffrent screen widthes
+
+@mixin container() {
+  %container, 
+  %container-to-xl {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto; 
+    margin-right: auto;
+  }
+  
+  @include media.md {
+    %container, 
+    %container-to-xl {
+      max-width: media.get("md") - 50px; 
+    }
+  }
+  
+  @include media.lg {
+    %container, 
+    %container-to-xl {
+      max-width: media.get("lg") - 50px; 
+    }
+  }
+  
+  @include media.xl {
+    %container, 
+    %container-to-xl {
+      max-width: media.get("xl") - 100px; 
+    }
+  }
+  
+  @include media.between("xl", "xxl") {
+    %container {
+      max-width: media.get("xl"); 
+    }
+  }
+  
+  @include media.xxl {
+    %container {
+      max-width: media.get("xxl") - 50px;
+    }
+  }
+  
+  @include media.xxxl {
+    %container {
+      max-width: media.get("xxxl") - 50px; 
+    }
+  }
+}
+
+
+// Jumbotrons
+//
+// A jumbotron the top, right, bottom, and/or left 
+// spacing of a page section, article, card, etc.
+
+@mixin jumbotron() {
+  %jumbotron-xxs { padding: var(--jumbotron-xs); }
+  %jumbotron-xs { padding: var(--jumbotron-xs); }
+  %jumbotron-sm { padding: var(--jumbotron-sm); }
+  %jumbotron-md { padding: var(--jumbotron-md); }
+  %jumbotron-lg { padding: var(--jumbotron-lg); }
+}
+
+@mixin jumbotron-sizes() {
+  --jumbotron-xxs: 0.25rem; // 4px
+  --jumbotron-xs: 0.5rem;   // 8px
+  --jumbotron-sm: 0.75rem;  // 12px
+  --jumbotron-md: 1rem;     // 16px
+  --jumbotron-lg: 1.25rem;  // 20px
+  --jumbotron-xl: 2rem;     // 32px
+  --jumbotron-xxl: 3rem;    // 48px
+}
+
+
+// Grid
+
+@mixin grid() {
+  --grid-gutter-xxs: .25rem;
+  --grid-gutter-xs: .5rem;
+  --grid-gutter-sm: .9rem;
+  --grid-gutter-md: 1.5rem;
+  --grid-gutter-lg: 2rem;
+  
+  --grid-gutter-xxs-n: -.25rem;
+  --grid-gutter-xs-n: -.5rem;
+  --grid-gutter-sm-n: -.9rem;
+  --grid-gutter-md-n: -1.5rem;
+  --grid-gutter-lg-n: -2rem;
+
+  --grid-gutter-xxs-half: .125rem;
+  --grid-gutter-xs-half: .25rem;
+  --grid-gutter-sm-half: .45rem;
+  --grid-gutter-md-half: .75rem;
+  --grid-gutter-lg-half: 1rem;
+  
+  --grid-gutter-xxs-half-n: -.125rem;
+  --grid-gutter-xs-half-n: -.25rem;
+  --grid-gutter-sm-half-n: -.45rem;
+  --grid-gutter-md-half-n: -.75rem;
+  --grid-gutter-lg-half-n: -1rem;
+}
+
+
+// Initalizing
+
+@include container();
+@include jumbotron();
+
+@mixin style() {
+  @include global();
+}

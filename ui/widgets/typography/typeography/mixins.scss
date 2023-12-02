@@ -1,0 +1,243 @@
+@use "/style/colors";
+
+
+@mixin heading($size) {
+  @include resize($size: $size, $type: "heading");
+
+  display: block;
+  color: var(--heading-fg);
+  font-family: var(--heading-family);
+  font-weight: 600;
+  font-style: normal;
+  text-transform: none;
+  text-decoration: none;
+  line-height: var(--heading-line-height);
+  margin: var(--heading-margin-top) 0 var(--heading-margin-bottom) 0;
+
+  &:first-child { margin-top: 0; }
+  &:last-child { margin-bottom: 0; }
+}
+
+@mixin text($size: "md") {
+  @include resize($size: $size, $type: "text");
+
+  color: var(--text-fg);
+  font-family: var(--text-family);
+  font-weight: 500;
+  font-style: normal;
+  text-decoration: none;
+  line-height: var(--text-line-height);
+}
+
+@mixin para($size: "md") {
+  @include resize($size: $size, $type: "text");
+
+  display: block;
+  color: var(--text-fg);
+  font-family: var(--text-family);
+  font-weight: 500;
+  font-style: normal;
+  text-transform: none;
+  text-decoration: none;
+  line-height: var(--text-line-height);
+  margin: var(--para-margin-top) 0 var(--para-margin-bottom) 0;
+
+  &:first-child { margin-top: 0; }
+  &:last-child { margin-bottom: 0; }
+}
+
+@mixin caption($size: "md") {
+  @include resize($size: $size, $type: "caption");
+
+  display: block;
+  color: var(--caption-fg);
+  font-family: var(--caption-family);
+  font-weight: 700;
+  font-style: normal;
+  text-transform: none;
+  text-decoration: none;
+  line-height: var(--caption-line-height);
+  margin: var(--caption-margin-top) 0 var(--caption-margin-bottom) 0;
+
+  &:first-child { margin-top: 0; }
+  &:last-child { margin-bottom: 0; }
+}
+
+@mixin link() {
+  display: inline;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+
+  &:link,
+  &:hover,
+  &:visited,
+  &:focus {
+    color: var(--link-fg);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  &:active {
+    color: var(--link-fg-active);
+  }
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+@mixin selection() {
+  color: var(--selection-fg);  
+  background-color: var(--selection-bg);
+}
+
+@mixin screen-reader-text() {
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  height: 1px !important;
+  width: 1px !important;
+  
+  position: absolute !important;
+  overflow: hidden;
+  
+  word-wrap: normal !important;
+}
+
+@mixin resize($type, $size) {
+  @if $type == "text" or $type == "para" {
+    @if $size == "lg" {
+      font-size: var(--text-size-lg); 
+      letter-spacing: normal;
+    } @else if $size == "md" {
+      font-size: var(--text-size-md); 
+      letter-spacing: normal;
+    } @else if $size == "sm" {
+      font-size: var(--text-size-sm); 
+      letter-spacing: 0.01em;
+    } @else if $size == "xs" {
+      font-size: var(--text-size-xs); 
+      letter-spacing: 0.02em;
+    } @else if $size == "xxs" {
+      font-size: var(--text-size-xxs);
+      letter-spacing: 0.03em;
+    } @else {
+      @error "Expected $size #{$size} to be either lg, md, sm, xs, or xxs";
+    }
+  } @else if $type == "caption" {
+    @if $size == "lg" {
+      font-size: var(--caption-size-lg); 
+      letter-spacing: normal;
+    } @else if $size == "md" {
+      font-size: var(--caption-size-md); 
+      letter-spacing: 0.01em;
+    } @else if $size == "sm" {
+      font-size: var(--caption-size-sm); 
+      letter-spacing: 0.02em;
+    } @else {
+      @error "Expected $size #{$size} to be either lg, md, or sm";
+    } 
+  } @else if $type == "heading" {
+    @if $size == "h1" {
+      font-size: var(--heading-size-h1); 
+      letter-spacing: -0.025em;
+    } @else if $size == "h2" {
+      font-size: var(--heading-size-h2); 
+      letter-spacing: -0.02em;
+    } @else if $size == "h3" {
+      font-size: var(--heading-size-h3); 
+      letter-spacing: -0.005em;
+    } @else if $size == "h4" {
+      font-size: var(--heading-size-h4); 
+      letter-spacing: 0;
+    } @else if $size == "h5" {
+      font-size: var(--heading-size-h5);
+      letter-spacing: 0.003em;
+    } @else if $size == "h6" {
+      font-size: var(--heading-size-h6); 
+      letter-spacing: 0.007em;
+    } @else if $size == "lg" {
+      font-size: var(--heading-size-h5);
+      letter-spacing: 0.007em;
+    } @else if $size == "md" {
+      font-size: var(--heading-size-h6); 
+      letter-spacing: 0.017em;
+    } @else {
+      @error "Expected $size #{$size} to be either 1, 2, 3, 4, 5, 6, sm, md, or lg";
+    }
+  } @else {
+    @error "Expected $type #{$type} to be either \"heading\", \"text\", \"para\", or \"caption\"";
+  }
+}
+
+@mixin list($type: "ul") {
+  padding-left: var(--list-padding-left);
+  margin: var(--list-margin-top) 0 var(--list-margin-bottom) 0;
+
+  list-style-position: outside;
+
+  ul { list-style-type: circle; }
+  ul ul {list-style-type: square;}
+  
+  ol { list-style-type: upper-latin; }
+  ol ol {list-style-type: upper-roman;}
+
+  @if $type == "ul" {
+    list-style-type: disc;
+  } @else if $type == "ol" {
+    list-style-type: decimal;
+  } @else {
+    @error "Expected $type '#{$type}' to be either 'ul' or 'ol'";
+  }
+}
+
+@mixin li() {
+  @include resize($size: "md", $type: "text");
+
+  display: list-item;
+  color: var(--text-fg);
+  font-family: var(--text-family);
+  font-weight: 600;
+  font-style: normal;
+  text-transform: none;
+  text-decoration: none;
+  line-height: var(--text-line-height);
+  margin: var(--para-margin-top) 0 var(--para-margin-bottom) 0;
+  list-style-type: inherit;
+
+  &:first-child { margin-top: 0; }
+  &:last-child { margin-bottom: 0; }
+}
+
+@mixin hr($theme: "dark") {
+  display: block;
+  width: auto;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: 0;
+
+  @if $theme == "light" {
+    background-color: colors.get("hr-light");
+  } @else if $theme == "dark" {
+    background-color: colors.get("hr-dark");
+  } @else {
+    @error "Expected $theme '#{$theme}' to be either 'light' or 'dark'";
+  }
+}
+
+@mixin code() {
+  display: block;
+  width: auto;
+
+  font-size: var(--text-size-md);
+  font-family: ui-monospace, SF Mono, Segoe UI Mono, Roboto Mono, Ubuntu Mono, Menlo, Courier, monospace;
+  line-height: 20px;
+  white-space: pre;
+  word-break: break-all;
+
+  color: colors.get("red") /* #eb5a46 */;
+  background-color: #f4f5f7;
+  padding: var(--jumbotron-xs);    
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 1px #091e4221;
+  margin: -1px 2px;
+}

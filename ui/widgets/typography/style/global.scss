@@ -1,0 +1,13 @@
+@mixin root() {
+  display: block;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;  
+
+  min-width: unset;
+  max-width: unset;
+  min-height: unset;
+  max-height: unset;
+}

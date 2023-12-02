@@ -1,0 +1,14 @@
+@use "sass:color";
+@use "/style/colors";
+
+$colors: (
+  heading-fg: #404040c7,
+  caption-fg: rgb(112, 115, 135, 97%),
+  text-fg: rgb(112, 115, 135, 97%),
+  link-fg: colors.get("sky"),
+  link-active-fg: color.adjust(colors.get("theme"), $lightness: -10%),
+  selection-fg: white,
+  selection-bg: color.adjust(colors.get("sky"), $alpha: -.3%),  
+);
+
+$light: $colors;

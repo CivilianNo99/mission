@@ -1,0 +1,202 @@
+@use "sass:color";
+@use "/style/colors";
+
+
+$gray: (
+  filled: true,
+  interactive: true,
+  
+  fg: hsla(0, 0%, 40%, 0.781),
+  normal-filled: true,
+  fill-fg: #797979,
+  fill-bg: #f2f2f28f,
+
+  hoverable: true,
+  hover-fg: hsl(0, 0%, 40%),
+  hover-filled: true,
+  hover-fill-fg: hsl(0, 0%, 40%),
+  hover-fill-bg: hsl(0, 0%, 93%),
+
+  activatable: true,
+  active-fg: color.adjust(colors.get("blue"), $alpha: -.2%),
+  active-filled: true,
+  active-fill-fg: color.adjust(colors.get("blue"), $alpha: -.2%),
+  active-fill-bg: color.adjust(colors.get("blue"), $alpha: -.92%),
+
+  focusable: true,
+  focus-filled: true,
+  focus-outline: colors.get("blue"),
+
+  disableable: true,
+  disabled-fg: hsla(0, 0%, 40%, 0.384),
+  disabled-filled: true,
+  disabled-fill-fg: hsla(0, 0%, 40%, 0.384),
+  disabled-fill-bg: hsla(0, 0%, 40%, 0.068),
+);
+
+$blue:
+(
+  filled: true,
+  interactive: true,
+
+  fg: colors.get("sky"),
+  normal-filled: true,
+  fill-fg: white,
+  fill-bg: colors.get("sky"),
+
+  hoverable: true,
+  hover-filled: true,
+  hover-fg: color.adjust(colors.get("sky"), $alpha: -.3%),
+  hover-fill-fg: white,
+  hover-fill-bg: color.adjust(colors.get("sky"), $alpha: -.15%),
+
+  activatable: true,
+  active-filled: true,
+  active-fg: colors.get("sky"),
+  active-fill-fg: white,
+  active-fill-bg: colors.get("sky"),
+
+  focusable: true,
+  focus-filled: true,
+  focus-outline: colors.get("sky"),
+
+  disableable: true,
+  disabled-fg: color.adjust(colors.get("sky"), $alpha: -.5%),
+  disabled-filled: true,
+  disabled-fill-fg: white,
+  disabled-fill-bg: color.adjust(colors.get("sky"), $alpha: -.5%),
+);
+
+
+$primary: $blue;
+
+
+$lightest: 
+(
+  filled: true,
+  interactive: true,
+
+  fg: hsla(0, 0%, 94%, 0.7),
+  normal-filled: true,
+  fill-fg: hsla(0, 0%, 100%, 0.87),
+  fill-bg: hsla(0, 0%, 100%, 0.14),
+  
+  hoverable: true,
+  hover-fg: white,
+  hover-filled: true,
+  hover-fill-fg: white, 
+  hover-fill-bg: hsla(0, 0%, 100%, 0.267),
+
+  activatable: true,
+  active-fg: white,
+  active-filled: true,
+  active-fill-fg: white, 
+  active-fill-bg: hsla(0, 0%, 100%, 0.562),
+
+  focusable: true,
+  focus-filled: true,
+  focus-outline: white,
+
+  disableable: true,
+  disabled-fg: hsla(0, 0%, 100%, 0.37),
+  disabled-filled: true,
+  disabled-fill-fg: hsla(0, 0%, 100%, 0.37),
+  disabled-fill-bg: hsla(0, 0%, 100%, 0.14),
+);
+
+$red:
+(
+  filled: true,
+  interactive: true,
+  
+  fg: colors.get("red"),
+  normal-filled: true,
+  fill-fg: white,
+  fill-bg: colors.get("red"),
+
+  hoverable: true,
+  hover-fg: color.adjust(colors.get("red"), $lightness: 5%),
+  hover-filled: true,
+  hover-fill-fg: white,
+  hover-fill-bg: color.adjust(colors.get("red"), $lightness: 5%),
+
+  activatable: true,
+  active-fg: color.adjust(colors.get("red"), $lightness: -5%),
+  active-filled: true,
+  active-fill-fg: white,
+  active-fill-bg: color.adjust(colors.get("red"), $lightness: -5%),
+
+  focusable: true,
+  focus-filled: true,
+  focus-outline: colors.get("red"),
+
+  disableable: true,
+  disabled-fg: color.adjust(colors.get("red"), $alpha: -.7%),
+  disabled-filled: true,
+  disabled-fill-fg: white,
+  disabled-fill-bg: color.adjust(colors.get("red"), $alpha: -.8%),
+);
+
+$h-gray-a-red: (
+  filled: true,
+  interactive: true,
+  
+  fg: null,
+  normal-filled: false,
+  fill-fg: hsl(0, 0%, 54%),
+  fill-bg: transparent,
+
+  hoverable: true,
+  hover-fg: null,
+  hover-filled: true,
+  hover-fill-fg: hsl(0, 0%, 54%),
+  hover-fill-bg: hsl(0, 0%, 95%),
+
+  activatable: true,
+  active-fg: null,
+  active-filled: true,
+  active-fill-fg: white,
+  active-fill-bg: colors.get("red"),
+
+  focusable: true,
+  focus-filled: true,
+  focus-outline: colors.get("red"),
+
+  disableable: true,
+  disabled-fg: hsla(0, 0%, 40%, 0.384),
+  disabled-filled: true,
+  disabled-fill-fg: hsla(0, 0%, 40%, 0.384),
+  disabled-fill-bg: hsla(0, 0%, 40%, 0.068),
+);
+
+$darker: (
+  filled: true,
+  interactive: true,
+  
+  fg: null,
+  normal-filled: true,
+  fill-fg: #ffffffeb,
+  fill-bg: #0e0e0eb3,
+
+  hoverable: true,
+  hover-fg: null,
+  hover-filled: true,
+  hover-fill-fg: null,
+  hover-fill-bg: null,
+
+  activatable: true,
+  active-fg: null,
+  active-filled: true,
+  active-fill-fg: null,
+  active-fill-bg: null,
+
+  focusable: true,
+  focus-filled: true,
+  focus-outline: colors.get("blue"),
+
+  disableable: true,
+  disabled-fg: null,
+  disabled-filled: true,
+  disabled-fill-fg: null,
+  disabled-fill-bg: null,
+);

@@ -1,0 +1,181 @@
+@use "sass:map";
+@use "reset";
+@use "fonts";
+@use "mixins";
+@use "variables";
+
+
+*, 
+*::after, 
+*::before {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  text-transform: inherit;
+  text-decoration: inherit;
+  line-height: inherit;
+}
+
+$typeScale: 1.067;
+$baseFontSize: 1rem;
+
+$fontSize6: $baseFontSize;
+
+$fontSize7: $fontSize6 / $typeScale;
+$fontSize8: $fontSize7 / $typeScale;
+$fontSize9: $fontSize8 / $typeScale;
+$fontSize10: $fontSize9 / $typeScale;
+$fontSize11: $fontSize10 / $typeScale;
+
+$fontSize5: $fontSize6 * $typeScale;
+$fontSize4: $fontSize5 * $typeScale;
+$fontSize3: $fontSize4 * $typeScale;
+$fontSize2: $fontSize3 * $typeScale;
+$fontSize1: $fontSize2 * $typeScale;
+
+$headingFg: black;
+$headingFamily: "Mada", "sans-serif";
+$headingLineHeight: 1;
+$headingMargingTop: 1rem;
+$headingMargingBottom: .5rem;
+
+$h1Size: $fontSize1;
+$h2Size: $fontSize2;
+$h3Size: $fontSize3;
+$h4Size: $fontSize4;
+$h5Size: $fontSize5;
+$h6Size: $fontSize6;
+
+$textFg: black;
+$textFamily: "mada", "sans-serif";
+$textLineHeight: 1.35;
+$textSizeLg: $fontSize6;
+$textSizeMd: $fontSize7;
+$textSizeSm: $fontSize8;
+$textSizeXs: $fontSize9;
+$textSizeXxs: $fontSize10;
+
+$paragraphMarginTop: .4em;
+$paragraphMarginBottom: .9em;
+
+$captionFg: black;
+$captionFontFamily: "Mada", "sans-serif";
+$captionLineHeight: 1;
+$captionSizeLg: $fontsize7;
+$captionSizeMd: $fontSize8;
+$captionSizeSm: $fontSize9;
+$captionMarginTop: .8em;
+$captionMarginBottom: .3em;
+
+// // List
+// --list-padding-left: 1rem;
+// --list-margin-top: .4em;
+// --list-margin-bottom: .9em;
+
+$linkFg: blue;
+$linkFgActive: red;
+
+$selectionFg: blue;
+$selectionBg: white;
+
+
+  // global styles
+  color: var(--text-fg);
+  font-family: var(--text-family);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 100%;
+  text-transform: none;
+  text-decoration: none;
+  line-height: var(--text-line-height);
+
+
+body {
+  @include mixins.resize($type: "text", $size: "md");
+}
+
+
+// Headings
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+.h { 
+  @include mixins.heading($size: "h6");
+}
+
+.h1 { @include mixins.resize($type: "heading", $size: "h1"); }
+.h2 { @include mixins.resize($type: "heading", $size: "h2"); }
+.h3 { @include mixins.resize($type: "heading", $size: "h3"); }
+.h4 { @include mixins.resize($type: "heading", $size: "h4"); }
+.h5 { @include mixins.resize($type: "heading", $size: "h5"); }
+.h6 { @include mixins.resize($type: "heading", $size: "h6"); }
+
+
+// Text
+
+.text { 
+  @include mixins.text($size: "md"); 
+  &.lg { @include mixins.resize($type: "text", $size: "lg"); }
+  &.md { @include mixins.resize($type: "text", $size: "md"); }
+  &.sm { @include mixins.resize($type: "text", $size: "sm"); }
+  &.xs { @include mixins.resize($type: "text", $size: "xs"); }
+  &.xxs { @include mixins.resize($type: "text", $size: "xxs"); }
+}
+
+
+// Paragraph
+
+p,
+.para { 
+  @include mixins.para($size: "md"); 
+  &.lg { @include mixins.resize($type: "para", $size: "lg"); }
+  &.md { @include mixins.resize($type: "para", $size: "md"); }
+  &.sm { @include mixins.resize($type: "para", $size: "sm"); }
+  &.xs { @include mixins.resize($type: "para", $size: "xs"); }
+  &.xxs { @include mixins.resize($type: "para", $size: "xxs"); }
+}
+
+
+// Other elements
+.caption { 
+  @include mixins.caption(); 
+}
+
+.link { 
+  @include mixins.link(); 
+}
+
+::selection { 
+  @include mixins.selection(); 
+}
+
+.screen-reader-text { 
+  @include mixins.screen-reader-text(); 
+}
+
+.hr { 
+  @include mixins.hr(); 
+}
+
+code { 
+  @include mixins.code(); 
+}
+
+
+// Utilites
+.ul { text-decoration: underline; }
+.lt { text-decoration: line-through; }
+.ol { text-decoration: overline; }
+.it  { font-style: italic; }
+
+.center { text-align: center; }
+.start  { text-align: start; }
+.end    { text-align: end; }
+.left   { text-align: left; }
+.right  { text-align: right; }

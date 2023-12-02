@@ -1,0 +1,23 @@
+@use "index";
+@use "/style/colors";
+
+
+$sky: (fg: white, bg: colors.get("sky") );
+$red: (fg: white, bg: colors.get("red") );
+$blue: (fg: white, bg: colors.get("blue") );
+$pink: (fg: white, bg: colors.get("pink") );
+$lime: (fg: white, bg: colors.get("lime") );
+$cyan: (fg: white, bg: colors.get("cyan") );
+$dark: (fg: white, bg: colors.get("dark") );
+$green: (fg: white, bg: colors.get("green") );
+$light: (fg: #333333f1, bg: colors.get("light") );
+$purple: (fg: white, bg: colors.get("purple") );
+$orange: (fg: white, bg: colors.get("orange") );
+$indigo: (fg: white, bg: colors.get("indigo") );
+$darker: (fg: white, bg: colors.get("darker") );
+$indigo: (fg: white, bg: colors.get("indigo") );
+$yellow: (fg: #333,  bg: colors.get("yellow") );
+$darkest: (fg: white, bg: colors.get("darkest") );
+$primary: (fg: colors.get("primary-fg"), bg: colors.get("primary") );
+$lighter: (fg: #333333d7, bg: colors.get("lighter") );
+$lightest: (fg: #333333, bg: colors.get("lightest") );

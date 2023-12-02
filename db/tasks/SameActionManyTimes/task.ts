@@ -59,10 +59,11 @@ export class SameActionManyTimesTask extends Task {
   static new(arg: NewArg) {
     return new SameActionManyTimesTask({
       id: arg.id || Id(),
+      title: arg.title,
       timeDue: arg.timeDue ?? null,
       timeStale: arg.timeStale ?? null,
       timeCreated: arg.now ?? Temporal.Now.instant(),
-      description: arg.description,
+      description: arg.description ?? "",
       timeCompleted: null,
       timesActionPerformed: 0,
       timesActionMustBePerformed: arg.timesActionMustBePerformed,

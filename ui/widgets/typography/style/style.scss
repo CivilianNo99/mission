@@ -1,0 +1,11 @@
+@use "./layout";
+
+:root {
+  --z-index-navbar: 10;
+  --z-index-popup: 11;
+  --z-index-module: 12;
+  --radius-sm: 5px; 
+  --document-bg: white;
+}
+
+@include layout.style();

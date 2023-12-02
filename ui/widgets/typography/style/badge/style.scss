@@ -1,0 +1,53 @@
+@use "./index";
+@use "./themes";
+
+.badge { @include index.create(); }
+
+.red { @include index.color(themes.$red); }
+.sky { @include index.color(themes.$sky); }
+.blue { @include index.color(themes.$blue); }
+.pink { @include index.color(themes.$pink); }
+.lime { @include index.color(themes.$lime); }
+.cyan { @include index.color(themes.$cyan); }
+.dark { @include index.color(themes.$dark); }
+.green { @include index.color(themes.$green); }
+.light { @include index.color(themes.$light); }
+.indigo { @include index.color(themes.$indigo); }
+.orange { @include index.color(themes.$orange); }
+.purple { @include index.color(themes.$purple); }
+.darker { @include index.color(themes.$darker); }
+.yellow { @include index.color(themes.$yellow); }
+.primary { @include index.color(themes.$primary); }
+.darkest { @include index.color(themes.$darkest); }
+.lighter { @include index.color(themes.$lighter); }
+.lightest { @include index.color(themes.$lightest); }
+
+.badge { @extend .primary; }
+
+.red,
+.sky,
+.blue,
+.pink,
+.lime,
+.cyan,
+.dark,
+.green,
+.light,
+.indigo,
+.orange,
+.purple,
+.darker,
+.yellow,
+.primary,
+.darkest,
+.lighter,
+.lightest {
+  @extend .badge;
+}
+
+.sm,
+.md,
+.lg {
+  @extend .badge;
+  @extend .primary;
+}
