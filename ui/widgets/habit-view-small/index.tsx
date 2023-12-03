@@ -18,7 +18,7 @@ export function Habit({ id }: Props) {
 
   return (
     <div className={style.wrapper}>
-      <div>{habit.description}</div>
+      <div>{habit.title}</div>
       <OptionsUI habitId={id} />
     </div>
   )

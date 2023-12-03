@@ -1,0 +1,10 @@
+@mixin input() {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.603);
+  line-height: 1;
+
+  border: 1px solid rgba(78, 76, 76, 0.226);
+  padding: .3rem .5rem;
+  outline: 0;
+}

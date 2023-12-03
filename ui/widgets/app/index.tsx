@@ -10,6 +10,8 @@ import { useState } from "react"
 import { SameActionManyTimesTask } from "/db/tasks/SameActionManyTimes"
 import { Card } from "../card"
 import { TasksView } from "../TasksView"
+import { TaskCreator } from "../TaskCreator"
+import { HabitCreator } from "../HabitCreator"
 
 export function App() {
   return (
@@ -23,7 +25,9 @@ export function App() {
     // <TestCheckbox />
 
     // <Card />
-    <TasksView />
+    // <TasksView />
+    // <TaskCreator />
+    <HabitCreator />
   )
 } 
 

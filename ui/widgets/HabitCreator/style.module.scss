@@ -1,0 +1,105 @@
+@mixin label() {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.603);
+  line-height: 1;
+}
+
+@mixin input() {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  // font-weight: bold;
+  color: rgba(0, 0, 0, 0.603);
+  line-height: 1;
+
+  margin: 0;
+  border: 1px solid rgba(78, 76, 76, 0.226);
+  padding: .3rem .5rem;
+  outline: 0;
+}
+
+@mixin button() {
+  display: block;
+  border: 0;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.603);
+  line-height: 1;
+  padding: .5rem;
+}
+
+.wrap {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  align-items: center;
+  row-gap: 1rem;
+  column-gap: 1.5rem;
+  grid-template-areas: 
+    "habit-header habit-header"
+    "habit-name   habit-name-input"
+    "task-header  task-header"
+    "task-name    task-name-input"
+    "task-type    task-type-input"
+    "footer       footer";
+
+  > :nth-child(1) {
+    @include label();
+    grid-area: habit-header;
+    text-align: center;
+    font-size: 15px;
+  }
+  
+  > :nth-child(2) {
+    grid-area: habit-name;
+    @include label;
+  }
+  > :nth-child(3) {
+    grid-area: habit-name-input;
+    // @include input;
+  }
+
+  > :nth-child(4) {
+    @include label();
+    grid-area: task-header;
+    text-align: center;
+    font-size: 15px;
+  }
+
+  > :nth-child(5) {
+    grid-area: task-name;
+    @include label;
+  }
+  > :nth-child(6) {
+    grid-area: task-name-input;
+    // @include input;
+  }
+
+  > :nth-child(7) {
+    grid-area: task-type;
+    @include label;
+  }
+  > :nth-child(8) {
+    grid-area: task-type-input;
+    @include input;
+    appearance: none;
+  }
+
+  > :nth-child(9) {
+    grid-area: footer;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+
+    > :nth-child(1) {
+      @include button();
+    }
+    > :nth-child(2) {
+      @include button();
+    }
+  }
+}

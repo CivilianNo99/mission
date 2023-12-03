@@ -1,0 +1,30 @@
+.wrap {
+  background-color: #ecebeb;
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  gap: .5rem;
+  border-radius: .5rem;
+  overflow: hidden;
+
+
+  // Input
+  > :nth-child(1) {
+    border: 0;
+    padding: .5rem;
+    background-color: transparent;
+    outline: 0;
+
+  }
+
+  > :nth-child(2) {
+    background-color: rgb(117, 40, 241);
+    color: white;
+    border: 0;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
